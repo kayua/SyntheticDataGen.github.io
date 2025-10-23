@@ -50,9 +50,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.03) 0%, transparent 50%);
+            background:
+                    radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.03) 0%, transparent 50%);
             animation: pulse 20s ease-in-out infinite;
         }
 
@@ -78,6 +78,10 @@
             padding: 20px 60px;
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
         }
 
         .nav-container {
@@ -423,6 +427,63 @@
             line-height: 1.8;
         }
 
+        /* Requirements Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td:not(:first-child) {
+            color: var(--text-secondary);
+        }
+
+        .requirements-note {
+            margin-top: 40px;
+            padding: 30px;
+            background: var(--light-card);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .requirements-note h4 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .requirements-note ul {
+            list-style: none;
+            padding: 0;
+            color: var(--text-secondary);
+            line-height: 2;
+        }
+
         /* Models Grid */
         .models-grid {
             display: grid;
@@ -531,34 +592,6 @@
 
         footer a:hover {
             text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 25px;
-            }
-
-            nav {
-                padding: 20px 25px;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .hero-text h1 {
-                font-size: 48px;
-            }
-
-            .section-title {
-                font-size: 42px;
-            }
-
-            .nav-links {
-                display: none;
-            }
         }
 
         /* Architecture Styles */
@@ -713,7 +746,33 @@
             font-weight: 900;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            nav {
+                padding: 20px 25px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
             .flow-diagram {
                 flex-direction: column;
             }
@@ -746,47 +805,49 @@
     </style>
 </head>
 <body>
-    <div class="background"></div>
+<div class="background"></div>
 
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">MalDataGen</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#models">Models</a></li>
-                <li><a href="#architecture">Architecture</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#docs">Documentation</a></li>
-                <a href="https://github.com/SBSeg25/MalDataGen" class="btn-nav" target="_blank">GitHub</a>
-            </ul>
-        </div>
-    </nav>
+<nav id="navbar">
+    <div class="nav-container">
+        <div class="logo">MalDataGen</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#requirements">Requirements</a></li>
+            <li><a href="#models">Models</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#usage">Usage</a></li>
+            <li><a href="#docs">Documentation</a></li>
+            <a href="https://github.com/SBSeg25/MalDataGen" class="btn-nav" target="_blank">GitHub</a>
+        </ul>
+    </div>
+</nav>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>MalDataGen</h1>
-                    <p class="subtitle">🌊 Jellyfish Edition (v1.0.0)</p>
-                    <p>An advanced Python framework for generating and evaluating synthetic tabular datasets using modern generative models, including diffusion and adversarial architectures.</p>
-                    
-                    <div class="badges">
-                        <span class="badge">✅ Active</span>
-                        <span class="badge">🐍 Python 3.8+</span>
-                        <span class="badge">🚀 GPU Supported</span>
-                        <span class="badge">📄 MIT License</span>
-                        <span class="badge">💚 Open Source</span>
-                    </div>
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>MalDataGen</h1>
+                <p class="subtitle">🌊 Jellyfish Edition (v1.0.0)</p>
+                <p>An advanced Python framework for generating and evaluating synthetic tabular datasets using modern generative models, including diffusion and adversarial architectures.</p>
 
-                    <div class="cta-buttons">
-                        <a href="https://github.com/SBSeg25/MalDataGen" class="btn btn-primary" target="_blank">Get Started</a>
-                        <a href="#docs" class="btn btn-secondary">Documentation</a>
-                    </div>
+                <div class="badges">
+                    <span class="badge">✅ Active</span>
+                    <span class="badge">🐍 Python 3.8+</span>
+                    <span class="badge">🚀 GPU Supported</span>
+                    <span class="badge">📄 MIT License</span>
+                    <span class="badge">💚 Open Source</span>
                 </div>
 
-                <div class="hero-image">
-                    <div class="code-card">
+                <div class="cta-buttons">
+                    <a href="https://github.com/SBSeg25/MalDataGen" class="btn btn-primary" target="_blank">Get Started</a>
+                    <a href="#docs" class="btn btn-secondary">Documentation</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="code-card">
                         <pre><code># Quick Start
 git clone https://github.com/SBSeg25/MalDataGen.git
 cd MalDataGen
@@ -797,347 +858,585 @@ python3 run_campaign_sbseg.py -c sf
 
 # Full experiments (7 hours)
 python3 run_campaign_sbseg.py</code></pre>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="features">
-        <div class="container">
-            <h2 class="section-title fade-in">Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Modular Architecture</h3>
-                    <p>Extensible design supporting multiple generative models with consistent APIs for easy integration and experimentation.</p>
-                </div>
+<!-- Seção de Features que estava faltando no posicionamento correto -->
+<section id="features">
+    <div class="container">
+        <h2 class="section-title fade-in">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3>Modular Architecture</h3>
+                <p>Extensible design supporting multiple generative models with consistent APIs for easy integration and experimentation.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚡</div>
-                    <h3>GPU Acceleration</h3>
-                    <p>Full CUDA support for efficient training on large datasets. Optional GPU execution for faster model convergence.</p>
-                </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">⚡</div>
+                <h3>GPU Acceleration</h3>
+                <p>Full CUDA support for efficient training on large datasets. Optional GPU execution for faster model convergence.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📊</div>
-                    <h3>Comprehensive Metrics</h3>
-                    <p>Built-in evaluation suite including accuracy, precision, recall, F1-score, ROC-AUC, and distance metrics.</p>
-                </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📊</div>
+                <h3>Comprehensive Metrics</h3>
+                <p>Built-in evaluation suite including accuracy, precision, recall, F1-score, ROC-AUC, and distance metrics.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Dual Evaluation</h3>
-                    <p>TS-TR and TR-TS validation strategies for thorough assessment of synthetic data quality and model generalization.</p>
-                </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔄</div>
+                <h3>Dual Evaluation</h3>
+                <p>TS-TR and TR-TS validation strategies for thorough assessment of synthetic data quality and model generalization.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📈</div>
-                    <h3>Visualization Tools</h3>
-                    <p>Publication-ready charts, confusion matrices, heatmaps, and clustering visualizations for data analysis.</p>
-                </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📈</div>
+                <h3>Visualization Tools</h3>
+                <p>Publication-ready charts, confusion matrices, heatmaps, and clustering visualizations for data analysis.</p>
+            </div>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🐳</div>
-                    <h3>Docker Support</h3>
-                    <p>Containerized execution environment ensuring reproducibility across different systems and configurations.</p>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🐳</div>
+                <h3>Docker Support</h3>
+                <p>Containerized execution environment ensuring reproducibility across different systems and configurations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="requirements">
+    <div class="container">
+        <h2 class="section-title fade-in">System Requirements</h2>
+
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 20px; padding: 50px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Minimum</th>
+                        <th>Recommended</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>💻 CPU</td>
+                        <td>Any x86_64</td>
+                        <td>Multi-core (i5/Ryzen 5+)</td>
+                    </tr>
+                    <tr>
+                        <td>🧠 RAM</td>
+                        <td>4 GB</td>
+                        <td>8 GB+</td>
+                    </tr>
+                    <tr>
+                        <td>💾 Storage</td>
+                        <td>10 GB</td>
+                        <td>20 GB SSD</td>
+                    </tr>
+                    <tr>
+                        <td>🎮 GPU</td>
+                        <td>Optional</td>
+                        <td>NVIDIA with CUDA 11+</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="requirements-note">
+                    <h4>📦 Software Dependencies</h4>
+                    <ul>
+                        <li>✅ Python 3.8 or higher</li>
+                        <li>✅ TensorFlow 2.x / PyTorch</li>
+                        <li>✅ NumPy, Pandas, Scikit-learn</li>
+                        <li>✅ Docker (optional, for containerized execution)</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section> <!-- Fechando a section de requirements -->
 
-    <section id="models" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
-        <div class="container">
-            <h2 class="section-title fade-in">Supported Models</h2>
-            
-            <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Native Implementations</h3>
-            <div class="models-grid">
-                <div class="model-card fade-in">
-                    <h4>CGAN</h4>
-                    <p>Conditional GANs for controlled generation with label conditioning</p>
-                    <span class="model-tag">Class Balancing</span>
-                </div>
 
-                <div class="model-card fade-in">
-                    <h4>WGAN & WGAN-GP</h4>
-                    <p>Wasserstein GAN with improved stability via gradient penalty</p>
-                    <span class="model-tag">Stable Training</span>
-                </div>
+<section id="models" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
+    <div class="container">
+        <h2 class="section-title fade-in">Supported Models</h2>
 
-                <div class="model-card fade-in">
-                    <h4>VAE</h4>
-                    <p>Variational Autoencoder with probabilistic latent space</p>
-                    <span class="model-tag">Probabilistic</span>
-                </div>
-
-                <div class="model-card fade-in">
-                    <h4>Denoising Diffusion</h4>
-                    <p>Progressive noise-based generation for high-quality samples</p>
-                    <span class="model-tag">State-of-the-art</span>
-                </div>
-
-                <div class="model-card fade-in">
-                    <h4>Latent Diffusion</h4>
-                    <p>Efficient diffusion in compressed latent space</p>
-                    <span class="model-tag">High Resolution</span>
-                </div>
-
-                <div class="model-card fade-in">
-                    <h4>VQ-VAE</h4>
-                    <p>Discrete latent representations via vector quantization</p>
-                    <span class="model-tag">Categorical Data</span>
-                </div>
-
-                <div class="model-card fade-in">
-                    <h4>SMOTE</h4>
-                    <p>Synthetic Minority Over-sampling Technique</p>
-                    <span class="model-tag">Imbalanced Data</span>
-                </div>
+        <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Native Implementations</h3>
+        <div class="models-grid">
+            <div class="model-card fade-in">
+                <h4>CGAN</h4>
+                <p>Conditional GANs for controlled generation with label conditioning</p>
+                <span class="model-tag">Class Balancing</span>
             </div>
 
-            <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin: 80px 0 40px; color: var(--primary-color);">Third-Party Integration (SDV)</h3>
-            <div class="models-grid">
-                <div class="model-card fade-in">
-                    <h4>TVAE</h4>
-                    <p>Tabular VAE optimized for structured data synthesis</p>
-                    <span class="model-tag">SDV</span>
-                </div>
+            <div class="model-card fade-in">
+                <h4>WGAN & WGAN-GP</h4>
+                <p>Wasserstein GAN with improved stability via gradient penalty</p>
+                <span class="model-tag">Stable Training</span>
+            </div>
 
-                <div class="model-card fade-in">
-                    <h4>Copula</h4>
-                    <p>Statistical modeling based on dependency functions</p>
-                    <span class="model-tag">SDV</span>
-                </div>
+            <div class="model-card fade-in">
+                <h4>VAE</h4>
+                <p>Variational Autoencoder with probabilistic latent space</p>
+                <span class="model-tag">Probabilistic</span>
+            </div>
 
-                <div class="model-card fade-in">
-                    <h4>CTGAN</h4>
-                    <p>Conditional GAN with mode-specific normalization</p>
-                    <span class="model-tag">SDV</span>
-                </div>
+            <div class="model-card fade-in">
+                <h4>Denoising Diffusion</h4>
+                <p>Progressive noise-based generation for high-quality samples</p>
+                <span class="model-tag">State-of-the-art</span>
+            </div>
+
+            <div class="model-card fade-in">
+                <h4>Latent Diffusion</h4>
+                <p>Efficient diffusion in compressed latent space</p>
+                <span class="model-tag">High Resolution</span>
+            </div>
+
+            <div class="model-card fade-in">
+                <h4>VQ-VAE</h4>
+                <p>Discrete latent representations via vector quantization</p>
+                <span class="model-tag">Categorical Data</span>
+            </div>
+
+            <div class="model-card fade-in">
+                <h4>SMOTE</h4>
+                <p>Synthetic Minority Over-sampling Technique</p>
+                <span class="model-tag">Imbalanced Data</span>
             </div>
         </div>
-    </section>
 
-    <section id="awards">
-        <div class="container">
-            <h2 class="section-title fade-in">Awards & Recognition</h2>
-            <div class="awards-grid">
-                <div class="award-card fade-in">
-                    <div class="award-icon">🏆</div>
-                    <h3>Best Tool SBSEG 2025</h3>
-                    <p>Recognized as the most innovative and impactful tool at the Brazilian Symposium on Cybersecurity</p>
-                </div>
+        <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin: 80px 0 40px; color: var(--primary-color);">Third-Party Integration (SDV)</h3>
+        <div class="models-grid">
+            <div class="model-card fade-in">
+                <h4>TVAE</h4>
+                <p>Tabular VAE optimized for structured data synthesis</p>
+                <span class="model-tag">SDV</span>
+            </div>
 
-                <div class="award-card fade-in">
-                    <div class="award-icon">💎</div>
-                    <h3>Highlighted Artifact</h3>
-                    <p>Awarded for outstanding contributions in the artifacts category with exceptional documentation and reproducibility</p>
-                </div>
+            <div class="model-card fade-in">
+                <h4>Copula</h4>
+                <p>Statistical modeling based on dependency functions</p>
+                <span class="model-tag">SDV</span>
+            </div>
+
+            <div class="model-card fade-in">
+                <h4>CTGAN</h4>
+                <p>Conditional GAN with mode-specific normalization</p>
+                <span class="model-tag">SDV</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="architecture" style="background: linear-gradient(180deg, var(--light-card) 0%, white 100%);">
-        <div class="container">
-            <h2 class="section-title fade-in">System Architecture</h2>
-            
-            <div class="architecture-description fade-in" style="max-width: 900px; margin: 0 auto 60px; text-align: center;">
-                <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.8;">
-                    The MalDataGen framework follows a modular architecture with four main layers, providing a comprehensive pipeline for synthetic data generation and evaluation.
-                </p>
+<section id="awards">
+    <div class="container">
+        <h2 class="section-title fade-in">Awards & Recognition</h2>
+        <div class="awards-grid">
+            <div class="award-card fade-in">
+                <div class="award-icon">🏆</div>
+                <h3>Best Tool SBSEG 2025</h3>
+                <p>Recognized as the most innovative and impactful tool at the Brazilian Symposium on Cybersecurity</p>
             </div>
 
-            <div class="architecture-layers">
-                <div class="layer-card fade-in">
-                    <div class="layer-number">1</div>
-                    <div class="layer-content">
-                        <h3>Input Layer</h3>
-                        <p>Handles data ingestion from CSV/XLS formats, preprocessing, and stratified k-fold splitting for robust evaluation.</p>
-                        <div class="layer-components">
-                            <span class="component-tag">CSV/XLS Data</span>
-                            <span class="component-tag">Data Preprocessing</span>
-                            <span class="component-tag">K-Fold Split</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layer-card fade-in">
-                    <div class="layer-number">2</div>
-                    <div class="layer-content">
-                        <h3>Generative Models</h3>
-                        <p>Core implementation of 8 different native generative algorithms, from adversarial to diffusion-based approaches.</p>
-                        <div class="layer-components">
-                            <span class="component-tag">CGAN</span>
-                            <span class="component-tag">WGAN</span>
-                            <span class="component-tag">VAE</span>
-                            <span class="component-tag">Diffusion</span>
-                            <span class="component-tag">VQ-VAE</span>
-                            <span class="component-tag">SMOTE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layer-card fade-in">
-                    <div class="layer-number">3</div>
-                    <div class="layer-content">
-                        <h3>Third-Party Integration</h3>
-                        <p>Seamless integration with Synthetic Data Vault (SDV) library models for enhanced generation capabilities.</p>
-                        <div class="layer-components">
-                            <span class="component-tag">CTGAN</span>
-                            <span class="component-tag">TVAE</span>
-                            <span class="component-tag">Copula</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layer-card fade-in">
-                    <div class="layer-number">4</div>
-                    <div class="layer-content">
-                        <h3>Evaluation Framework</h3>
-                        <p>Implements TS-TR and TR-TS evaluation strategies with cross-validation for comprehensive quality assessment.</p>
-                        <div class="layer-components">
-                            <span class="component-tag">TS-TR Strategy</span>
-                            <span class="component-tag">TR-TS Strategy</span>
-                            <span class="component-tag">Cross-Validation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layer-card fade-in">
-                    <div class="layer-number">5</div>
-                    <div class="layer-content">
-                        <h3>Metrics & Analysis</h3>
-                        <p>Comprehensive evaluation metrics and publication-ready visualization capabilities for thorough analysis.</p>
-                        <div class="layer-components">
-                            <span class="component-tag">Binary Metrics</span>
-                            <span class="component-tag">Distance Metrics</span>
-                            <span class="component-tag">Efficiency Metrics</span>
-                            <span class="component-tag">Visualization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="architecture-flow fade-in" style="margin-top: 80px;">
-                <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Data Flow Pipeline</h3>
-                <div class="flow-diagram">
-                    <div class="flow-step">
-                        <div class="flow-icon">📥</div>
-                        <h4>Ingest</h4>
-                        <p>CSV/XLS Data</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">
-                        <div class="flow-icon">⚙️</div>
-                        <h4>Process</h4>
-                        <p>Clean & Split</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">
-                        <div class="flow-icon">🧠</div>
-                        <h4>Generate</h4>
-                        <p>Synthetic Data</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">
-                        <div class="flow-icon">🔍</div>
-                        <h4>Evaluate</h4>
-                        <p>TS-TR & TR-TS</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">
-                        <div class="flow-icon">📊</div>
-                        <h4>Analyze</h4>
-                        <p>Metrics & Viz</p>
-                    </div>
-                </div>
+            <div class="award-card fade-in">
+                <div class="award-icon">💎</div>
+                <h3>Highlighted Artifact</h3>
+                <p>Awarded for outstanding contributions in the artifacts category with exceptional documentation and reproducibility</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="docs" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
-        <div class="container">
-            <h2 class="section-title fade-in">Documentation</h2>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📚</div>
-                    <h3>API Reference</h3>
-                    <p>Complete API documentation with examples and best practices for all models and utilities.</p>
-                </div>
+<section id="architecture" style="background: linear-gradient(180deg, var(--light-card) 0%, white 100%);">
+    <div class="container">
+        <h2 class="section-title fade-in">System Architecture</h2>
 
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🎓</div>
-                    <h3>Tutorials</h3>
-                    <p>Step-by-step guides for common use cases, from basic generation to advanced customization.</p>
-                </div>
-
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📐</div>
-                    <h3>Architecture Diagrams</h3>
-                    <p>8 comprehensive Mermaid diagrams documenting system design, data flow, and evaluation strategies.</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 60px;">
-                <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" class="btn btn-primary" target="_blank">View Full Documentation</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>© 2025 MalDataGen. MIT License.</p>
-            <p style="margin-top: 10px;">
-                <a href="https://github.com/SBSeg25/MalDataGen" target="_blank">GitHub</a> • 
-                <a href="https://doi.org/10.5753/sbseg_estendido.2025.12113" target="_blank">Paper</a> • 
-                <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" target="_blank">Documentation</a>
-            </p>
-            <p style="margin-top: 20px; font-size: 14px;">
-                Built by Kayuã Paim, Angelo Nogueira, Diego Kreutz, Weverton Cordeiro, and Rodrigo Mansilha
+        <div class="architecture-description fade-in" style="max-width: 900px; margin: 0 auto 60px; text-align: center;">
+            <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.8;">
+                The MalDataGen framework follows a modular architecture with four main layers, providing a comprehensive pipeline for synthetic data generation and evaluation.
             </p>
         </div>
-    </footer>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+        <div class="architecture-layers">
+            <div class="layer-card fade-in">
+                <div class="layer-number">1</div>
+                <div class="layer-content">
+                    <h3>Input Layer</h3>
+                    <p>Handles data ingestion from CSV/XLS formats, preprocessing, and stratified k-fold splitting for robust evaluation.</p>
+                    <div class="layer-components">
+                        <span class="component-tag">CSV/XLS Data</span>
+                        <span class="component-tag">Data Preprocessing</span>
+                        <span class="component-tag">K-Fold Split</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-card fade-in">
+                <div class="layer-number">2</div>
+                <div class="layer-content">
+                    <h3>Generative Models</h3>
+                    <p>Core implementation of 8 different native generative algorithms, from adversarial to diffusion-based approaches.</p>
+                    <div class="layer-components">
+                        <span class="component-tag">CGAN</span>
+                        <span class="component-tag">WGAN</span>
+                        <span class="component-tag">VAE</span>
+                        <span class="component-tag">Diffusion</span>
+                        <span class="component-tag">VQ-VAE</span>
+                        <span class="component-tag">SMOTE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-card fade-in">
+                <div class="layer-number">3</div>
+                <div class="layer-content">
+                    <h3>Third-Party Integration</h3>
+                    <p>Seamless integration with Synthetic Data Vault (SDV) library models for enhanced generation capabilities.</p>
+                    <div class="layer-components">
+                        <span class="component-tag">CTGAN</span>
+                        <span class="component-tag">TVAE</span>
+                        <span class="component-tag">Copula</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-card fade-in">
+                <div class="layer-number">4</div>
+                <div class="layer-content">
+                    <h3>Evaluation Framework</h3>
+                    <p>Implements TS-TR and TR-TS evaluation strategies with cross-validation for comprehensive quality assessment.</p>
+                    <div class="layer-components">
+                        <span class="component-tag">TS-TR Strategy</span>
+                        <span class="component-tag">TR-TS Strategy</span>
+                        <span class="component-tag">Cross-Validation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-card fade-in">
+                <div class="layer-number">5</div>
+                <div class="layer-content">
+                    <h3>Metrics & Analysis</h3>
+                    <p>Comprehensive evaluation metrics and publication-ready visualization capabilities for thorough analysis.</p>
+                    <div class="layer-components">
+                        <span class="component-tag">Binary Metrics</span>
+                        <span class="component-tag">Distance Metrics</span>
+                        <span class="component-tag">Efficiency Metrics</span>
+                        <span class="component-tag">Visualization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="architecture-flow fade-in" style="margin-top: 80px;">
+            <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Data Flow Pipeline</h3>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <div class="flow-icon">📥</div>
+                    <h4>Ingest</h4>
+                    <p>CSV/XLS Data</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">⚙️</div>
+                    <h4>Process</h4>
+                    <p>Clean & Split</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🧠</div>
+                    <h4>Generate</h4>
+                    <p>Synthetic Data</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🔍</div>
+                    <h4>Evaluate</h4>
+                    <p>TS-TR & TR-TS</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">📊</div>
+                    <h4>Analyze</h4>
+                    <p>Metrics & Viz</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="usage" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
+    <div class="container">
+        <h2 class="section-title fade-in">Usage Examples</h2>
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <!-- CGAN Example -->
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Conditional GAN (CGAN)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Generate synthetic samples using Conditional GANs with label conditioning for balanced datasets.</p>
+                <pre><code>import numpy
+import tensorflow
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.losses import BinaryCrossentropy
+
+from SynDataGen.Engine.Models.Adversarial.AdversarialModel import AdversarialModel
+from SynDataGen.Engine.Algorithms.Adversarial.AdversarialAlgorithm import AdversarialAlgorithm
+
+# Define class distribution and input shape
+number_samples_per_class = {
+    "classes": {1: 100, 2: 200, 3: 150},
+    "number_classes": 3
+}
+input_shape = (1200, )
+
+# Initialize Adversarial Model
+adversarial_model = AdversarialModel(
+    latent_dimension=128,
+    output_shape=input_shape,
+    activation_function="LeakyReLU",
+    initializer_mean=0.0,
+    initializer_deviation=0.5,
+    dropout_decay_rate_g=0.2,
+    dropout_decay_rate_d=0.4,
+    last_layer_activation="Sigmoid",
+    dense_layer_sizes_g=[128],
+    dense_layer_sizes_d=[128],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
+)
+
+# Setup training algorithm
+adversarial_algorithm = AdversarialAlgorithm(
+    generator_model=adversarial_model.get_generator(),
+    discriminator_model=adversarial_model.get_discriminator(),
+    latent_dimension=128,
+    loss_generator='binary_crossentropy',
+    loss_discriminator='binary_crossentropy',
+    file_name_discriminator="discriminator_model",
+    file_name_generator="generator_model",
+    models_saved_path="models_saved/",
+    latent_mean_distribution=0.0,
+    latent_stander_deviation=1.0,
+    smoothing_rate=0.15
+)
+
+# Compile and train
+generator_optimizer = Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9)
+discriminator_optimizer = Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9)
+
+adversarial_algorithm.compile(
+    generator_optimizer, discriminator_optimizer,
+    BinaryCrossentropy(), BinaryCrossentropy()
+)
+
+adversarial_algorithm.fit(
+    x_real_samples,
+    to_categorical(y_real_samples, num_classes=3),
+    epochs=1000, batch_size=32
+)
+
+# Generate synthetic samples
+samples = adversarial_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+            <!-- Diffusion Model Example -->
+            <div class="code-card fade-in">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Diffusion Model</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">State-of-the-art generation using denoising diffusion with latent space compression.</p>
+                <pre><code>import numpy
+import tensorflow
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.losses import MeanSquaredError
+from tensorflow.keras.utils import to_categorical
+
+from SynDataGen.Engine.Models.Diffusion.DiffusionModelUnet import UNetModel
+from SynDataGen.Engine.Algorithms.Diffusion.AlgorithmDiffusion import DiffusionModel
+from SynDataGen.Engine.Algorithms.Diffusion.GaussianDiffusion import GaussianDiffusion
+from SynDataGen.Engine.Models.Diffusion.VariationalAutoencoderModel import VariationalModelDiffusion
+from SynDataGen.Engine.Algorithms.Diffusion.AlgorithmVariationalAutoencoderDiffusion import VariationalAlgorithmDiffusion
+
+number_samples_per_class = {
+    "classes": {1: 100, 2: 200, 3: 150},
+    "number_classes": 3
+}
+input_shape = (1200, )
+
+# Initialize UNet models
+first_instance_unet = UNetModel(
+    embedding_dimension=128,
+    embedding_channels=1,
+    list_neurons_per_level=[1, 2, 4],
+    list_attentions=[False, True, True],
+    number_residual_blocks=2,
+    normalization_groups=1,
+    intermediary_activation_function='swish',
+    number_samples_per_class=number_samples_per_class
+)
+
+first_unet_model = first_instance_unet.build_model()
+second_unet_model = first_instance_unet.build_model()
+second_unet_model.set_weights(first_unet_model.get_weights())
+
+# Initialize Gaussian Diffusion
+gaussian_diffusion_util = GaussianDiffusion(
+    beta_start=1e-4,
+    beta_end=0.02,
+    time_steps=1000,
+    clip_min=-1.0,
+    clip_max=1.0
+)
+
+# Initialize Variational Model
+variation_model_diffusion = VariationalModelDiffusion(
+    latent_dimension=128,
+    output_shape=input_shape,
+    activation_function='swish',
+    number_neurons_encoder=[128, 64],
+    number_neurons_decoder=[64, 128],
+    number_samples_per_class=number_samples_per_class
+)
+
+# Setup diffusion algorithm
+diffusion_algorithm = DiffusionModel(
+    first_unet_model=first_unet_model,
+    second_unet_model=second_unet_model,
+    encoder_model_image=variation_model_diffusion.get_encoder(),
+    decoder_model_image=variation_model_diffusion.get_decoder(),
+    gdf_util=gaussian_diffusion_util,
+    time_steps=1000,
+    ema=0.9999
+)
+
+diffusion_algorithm.compile(
+    loss=MeanSquaredError(),
+    optimizer=Adam(learning_rate=0.002)
+)
+
+# Train and generate
+diffusion_algorithm.fit(
+    data_embedding,
+    to_categorical(y_real_samples, num_classes=3),
+    epochs=1000, batch_size=32
+)
+
+samples = variational_algorithm_diffusion.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="docs" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
+    <div class="container">
+        <h2 class="section-title fade-in">Documentation</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📚</div>
+                <h3>API Reference</h3>
+                <p>Complete API documentation with examples and best practices for all models and utilities.</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎓</div>
+                <h3>Tutorials</h3>
+                <p>Step-by-step guides for common use cases, from basic generation to advanced customization.</p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📐</div>
+                <h3>Architecture Diagrams</h3>
+                <p>8 comprehensive Mermaid diagrams documenting system design, data flow, and evaluation strategies.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" class="btn btn-primary" target="_blank">View Full Documentation</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2025 MalDataGen. MIT License.</p>
+        <p style="margin-top: 10px;">
+            <a href="https://github.com/SBSeg25/MalDataGen" target="_blank">GitHub</a> •
+            <a href="https://doi.org/10.5753/sbseg_estendido.2025.12113" target="_blank">Paper</a> •
+            <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" target="_blank">Documentation</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 14px;">
+            Built by Kayuã Paim, Angelo Nogueira, Diego Kreutz, Weverton Cordeiro, and Rodrigo Mansilha
+        </p>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect with hide/show on scroll
+    let lastScrollTop = 0;
+    const navbar = document.getElementById('navbar');
+    const scrollThreshold = 100;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Add scrolled class for styling
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Hide/show navbar based on scroll direction
+        if (scrollTop > scrollThreshold) {
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('hidden');
             } else {
-                navbar.classList.remove('scrolled');
+                // Scrolling up
+                navbar.classList.remove('hidden');
+            }
+        } else {
+            // Always show at top
+            navbar.classList.remove('hidden');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
+    });
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+    // Fade in on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
+    }, observerOptions);
 
-        // Fade in on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
