@@ -327,7 +327,7 @@
 
         pre {
             background: #1a1a1a;
-            color: #00ff00;
+            color: #ffffff;
             padding: 30px;
             border-radius: 12px;
             overflow-x: auto;
@@ -335,6 +335,18 @@
             font-size: 14px;
             line-height: 1.6;
         }
+
+        /* Python syntax highlighting */
+        .code-keyword { color: #ff79c6; font-weight: bold; } /* Pink for keywords */
+        .code-function { color: #50fa7b; } /* Green for functions */
+        .code-string { color: #f1fa8c; } /* Yellow for strings */
+        .code-comment { color: #6272a4; font-style: italic; } /* Gray for comments */
+        .code-number { color: #bd93f9; } /* Purple for numbers */
+        .code-class { color: #8be9fd; } /* Cyan for classes */
+        .code-operator { color: #ff79c6; } /* Pink for operators */
+        .code-import { color: #ffb86c; } /* Orange for imports */
+        .code-constant { color: #bd93f9; } /* Purple for constants */
+        .code-builtin { color: #50fa7b; } /* Green for built-in functions */
 
         /* Section Styles */
         section {
@@ -848,16 +860,16 @@
 
             <div class="hero-image">
                 <div class="code-card">
-                        <pre><code># Quick Start
-git clone https://github.com/SBSeg25/MalDataGen.git
-cd MalDataGen
-pip install -r requirements.txt
+                        <pre><code><span class="code-comment"># Quick Start</span>
+<span class="code-keyword">git</span> clone https:<span class="code-comment">//github.com/SBSeg25/MalDataGen.git</span>
+<span class="code-keyword">cd</span> MalDataGen
+<span class="code-keyword">pip</span> install -r requirements.txt
 
-# Run demo (3 minutes)
-python3 run_campaign_sbseg.py -c sf
+<span class="code-comment"># Run demo (3 minutes)</span>
+<span class="code-keyword">python3</span> run_campaign_sbseg.py -c sf
 
-# Full experiments (7 hours)
-python3 run_campaign_sbseg.py</code></pre>
+<span class="code-comment"># Full experiments (7 hours)</span>
+<span class="code-keyword">python3</span> run_campaign_sbseg.py</code></pre>
                 </div>
             </div>
         </div>
@@ -1179,56 +1191,56 @@ python3 run_campaign_sbseg.py</code></pre>
             <div class="code-card fade-in" style="margin-bottom: 40px;">
                 <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Conditional GAN (CGAN)</h3>
                 <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Generate synthetic samples using Conditional GANs with label conditioning for balanced datasets.</p>
-                <pre><code>import numpy
-import tensorflow
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.losses import BinaryCrossentropy
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">import</span> tensorflow
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> BinaryCrossentropy
 
-from SynDataGen.Engine.Models.Adversarial.AdversarialModel import AdversarialModel
-from SynDataGen.Engine.Algorithms.Adversarial.AdversarialAlgorithm import AdversarialAlgorithm
+<span class="code-keyword">from</span> SynDataGen.Engine.Models.Adversarial.AdversarialModel <span class="code-keyword">import</span> AdversarialModel
+<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Adversarial.AdversarialAlgorithm <span class="code-keyword">import</span> AdversarialAlgorithm
 
-# Define class distribution and input shape
+<span class="code-comment"># Define class distribution and input shape</span>
 number_samples_per_class = {
-    "classes": {1: 100, 2: 200, 3: 150},
-    "number_classes": 3
+    <span class="code-string">"classes"</span>: {<span class="code-number">1</span>: <span class="code-number">100</span>, <span class="code-number">2</span>: <span class="code-number">200</span>, <span class="code-number">3</span>: <span class="code-number">150</span>},
+    <span class="code-string">"number_classes"</span>: <span class="code-number">3</span>
 }
-input_shape = (1200, )
+input_shape = (<span class="code-number">1200</span>, )
 
-# Initialize Adversarial Model
+<span class="code-comment"># Initialize Adversarial Model</span>
 adversarial_model = AdversarialModel(
-    latent_dimension=128,
+    latent_dimension=<span class="code-number">128</span>,
     output_shape=input_shape,
-    activation_function="LeakyReLU",
-    initializer_mean=0.0,
-    initializer_deviation=0.5,
-    dropout_decay_rate_g=0.2,
-    dropout_decay_rate_d=0.4,
-    last_layer_activation="Sigmoid",
-    dense_layer_sizes_g=[128],
-    dense_layer_sizes_d=[128],
+    activation_function=<span class="code-string">"LeakyReLU"</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.5</span>,
+    dropout_decay_rate_g=<span class="code-number">0.2</span>,
+    dropout_decay_rate_d=<span class="code-number">0.4</span>,
+    last_layer_activation=<span class="code-string">"Sigmoid"</span>,
+    dense_layer_sizes_g=[<span class="code-number">128</span>],
+    dense_layer_sizes_d=[<span class="code-number">128</span>],
     dataset_type=numpy.float32,
     number_samples_per_class=number_samples_per_class
 )
 
-# Setup training algorithm
+<span class="code-comment"># Setup training algorithm</span>
 adversarial_algorithm = AdversarialAlgorithm(
     generator_model=adversarial_model.get_generator(),
     discriminator_model=adversarial_model.get_discriminator(),
-    latent_dimension=128,
-    loss_generator='binary_crossentropy',
-    loss_discriminator='binary_crossentropy',
-    file_name_discriminator="discriminator_model",
-    file_name_generator="generator_model",
-    models_saved_path="models_saved/",
-    latent_mean_distribution=0.0,
-    latent_stander_deviation=1.0,
-    smoothing_rate=0.15
+    latent_dimension=<span class="code-number">128</span>,
+    loss_generator=<span class="code-string">'binary_crossentropy'</span>,
+    loss_discriminator=<span class="code-string">'binary_crossentropy'</span>,
+    file_name_discriminator=<span class="code-string">"discriminator_model"</span>,
+    file_name_generator=<span class="code-string">"generator_model"</span>,
+    models_saved_path=<span class="code-string">"models_saved/"</span>,
+    latent_mean_distribution=<span class="code-number">0.0</span>,
+    latent_stander_deviation=<span class="code-number">1.0</span>,
+    smoothing_rate=<span class="code-number">0.15</span>
 )
 
-# Compile and train
-generator_optimizer = Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9)
-discriminator_optimizer = Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9)
+<span class="code-comment"># Compile and train</span>
+generator_optimizer = Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>)
+discriminator_optimizer = Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>)
 
 adversarial_algorithm.compile(
     generator_optimizer, discriminator_optimizer,
@@ -1237,11 +1249,11 @@ adversarial_algorithm.compile(
 
 adversarial_algorithm.fit(
     x_real_samples,
-    to_categorical(y_real_samples, num_classes=3),
-    epochs=1000, batch_size=32
+    to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
+    epochs=<span class="code-number">1000</span>, batch_size=<span class="code-number">32</span>
 )
 
-# Generate synthetic samples
+<span class="code-comment"># Generate synthetic samples</span>
 samples = adversarial_algorithm.get_samples(number_samples_per_class)</code></pre>
             </div>
 
@@ -1249,33 +1261,33 @@ samples = adversarial_algorithm.get_samples(number_samples_per_class)</code></pr
             <div class="code-card fade-in">
                 <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Diffusion Model</h3>
                 <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">State-of-the-art generation using denoising diffusion with latent space compression.</p>
-                <pre><code>import numpy
-import tensorflow
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import MeanSquaredError
-from tensorflow.keras.utils import to_categorical
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">import</span> tensorflow
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> MeanSquaredError
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
 
-from SynDataGen.Engine.Models.Diffusion.DiffusionModelUnet import UNetModel
-from SynDataGen.Engine.Algorithms.Diffusion.AlgorithmDiffusion import DiffusionModel
-from SynDataGen.Engine.Algorithms.Diffusion.GaussianDiffusion import GaussianDiffusion
-from SynDataGen.Engine.Models.Diffusion.VariationalAutoencoderModel import VariationalModelDiffusion
-from SynDataGen.Engine.Algorithms.Diffusion.AlgorithmVariationalAutoencoderDiffusion import VariationalAlgorithmDiffusion
+<span class="code-keyword">from</span> SynDataGen.Engine.Models.Diffusion.DiffusionModelUnet <span class="code-keyword">import</span> UNetModel
+<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.AlgorithmDiffusion <span class="code-keyword">import</span> DiffusionModel
+<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.GaussianDiffusion <span class="code-keyword">import</span> GaussianDiffusion
+<span class="code-keyword">from</span> SynDataGen.Engine.Models.Diffusion.VariationalAutoencoderModel <span class="code-keyword">import</span> VariationalModelDiffusion
+<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.AlgorithmVariationalAutoencoderDiffusion <span class="code-keyword">import</span> VariationalAlgorithmDiffusion
 
 number_samples_per_class = {
-    "classes": {1: 100, 2: 200, 3: 150},
-    "number_classes": 3
+    <span class="code-string">"classes"</span>: {<span class="code-number">1</span>: <span class="code-number">100</span>, <span class="code-number">2</span>: <span class="code-number">200</span>, <span class="code-number">3</span>: <span class="code-number">150</span>},
+    <span class="code-string">"number_classes"</span>: <span class="code-number">3</span>
 }
-input_shape = (1200, )
+input_shape = (<span class="code-number">1200</span>, )
 
-# Initialize UNet models
+<span class="code-comment"># Initialize UNet models</span>
 first_instance_unet = UNetModel(
-    embedding_dimension=128,
-    embedding_channels=1,
-    list_neurons_per_level=[1, 2, 4],
-    list_attentions=[False, True, True],
-    number_residual_blocks=2,
-    normalization_groups=1,
-    intermediary_activation_function='swish',
+    embedding_dimension=<span class="code-number">128</span>,
+    embedding_channels=<span class="code-number">1</span>,
+    list_neurons_per_level=[<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">4</span>],
+    list_attentions=[<span class="code-keyword">False</span>, <span class="code-keyword">True</span>, <span class="code-keyword">True</span>],
+    number_residual_blocks=<span class="code-number">2</span>,
+    normalization_groups=<span class="code-number">1</span>,
+    intermediary_activation_function=<span class="code-string">'swish'</span>,
     number_samples_per_class=number_samples_per_class
 )
 
@@ -1283,46 +1295,46 @@ first_unet_model = first_instance_unet.build_model()
 second_unet_model = first_instance_unet.build_model()
 second_unet_model.set_weights(first_unet_model.get_weights())
 
-# Initialize Gaussian Diffusion
+<span class="code-comment"># Initialize Gaussian Diffusion</span>
 gaussian_diffusion_util = GaussianDiffusion(
-    beta_start=1e-4,
-    beta_end=0.02,
-    time_steps=1000,
-    clip_min=-1.0,
-    clip_max=1.0
+    beta_start=<span class="code-number">1e-4</span>,
+    beta_end=<span class="code-number">0.02</span>,
+    time_steps=<span class="code-number">1000</span>,
+    clip_min=-<span class="code-number">1.0</span>,
+    clip_max=<span class="code-number">1.0</span>
 )
 
-# Initialize Variational Model
+<span class="code-comment"># Initialize Variational Model</span>
 variation_model_diffusion = VariationalModelDiffusion(
-    latent_dimension=128,
+    latent_dimension=<span class="code-number">128</span>,
     output_shape=input_shape,
-    activation_function='swish',
-    number_neurons_encoder=[128, 64],
-    number_neurons_decoder=[64, 128],
+    activation_function=<span class="code-string">'swish'</span>,
+    number_neurons_encoder=[<span class="code-number">128</span>, <span class="code-number">64</span>],
+    number_neurons_decoder=[<span class="code-number">64</span>, <span class="code-number">128</span>],
     number_samples_per_class=number_samples_per_class
 )
 
-# Setup diffusion algorithm
+<span class="code-comment"># Setup diffusion algorithm</span>
 diffusion_algorithm = DiffusionModel(
     first_unet_model=first_unet_model,
     second_unet_model=second_unet_model,
     encoder_model_image=variation_model_diffusion.get_encoder(),
     decoder_model_image=variation_model_diffusion.get_decoder(),
     gdf_util=gaussian_diffusion_util,
-    time_steps=1000,
-    ema=0.9999
+    time_steps=<span class="code-number">1000</span>,
+    ema=<span class="code-number">0.9999</span>
 )
 
 diffusion_algorithm.compile(
     loss=MeanSquaredError(),
-    optimizer=Adam(learning_rate=0.002)
+    optimizer=Adam(learning_rate=<span class="code-number">0.002</span>)
 )
 
-# Train and generate
+<span class="code-comment"># Train and generate</span>
 diffusion_algorithm.fit(
     data_embedding,
-    to_categorical(y_real_samples, num_classes=3),
-    epochs=1000, batch_size=32
+    to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
+    epochs=<span class="code-number">1000</span>, batch_size=<span class="code-number">32</span>
 )
 
 samples = variational_algorithm_diffusion.get_samples(number_samples_per_class)</code></pre>
