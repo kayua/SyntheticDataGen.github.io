@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalDataGen - Composable Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #1a1a1a;
+            --accent-color: #333333;
+            --light-bg: #ffffff;
+            --light-card: #fafafa;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border-color: #e5e5e5;
+            --hover-bg: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #ffffff;
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.03) 0%, transparent 50%);
+            animation: pulse 20s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 60px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(30px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            padding: 20px 60px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            padding: 12px 30px;
+            border-radius: 10px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            letter-spacing: -2px;
+            line-height: 1.1;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-text .subtitle {
+            font-size: 26px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+            animation: slideInLeft 1.2s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            animation: slideInLeft 1.4s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+            animation: slideInLeft 1.6s ease-out;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            background: var(--light-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            animation: slideInLeft 1.8s ease-out;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .code-card {
+            background: var(--light-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .code-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .code-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        pre {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            font-size: 56px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 80px;
+            color: var(--primary-color);
+            letter-spacing: -2px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--primary-color);
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover::before {
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Models Grid */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .model-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .model-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .model-card h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .model-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .model-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--light-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 10px;
+        }
+
+        /* Awards Section */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .award-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .award-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .award-card h3 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .award-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light-card);
+            border-top: 1px solid var(--border-color);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            nav {
+                padding: 20px 25px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Architecture Styles */
+        .architecture-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .layer-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layer-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 0;
+            background: var(--primary-color);
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .layer-card:hover::before {
+            height: 100%;
+        }
+
+        .layer-card:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .layer-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .layer-content {
+            flex: 1;
+        }
+
+        .layer-content h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .layer-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .layer-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .component-tag {
+            padding: 6px 14px;
+            background: var(--light-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .component-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 40px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .flow-step {
+            text-align: center;
+            padding: 25px;
+            background: var(--light-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .flow-step:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .flow-step h4 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .flow-step p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .flow-arrow {
+            font-size: 32px;
+            color: var(--primary-color);
+            font-weight: 900;
+        }
+
+        @media (max-width: 768px) {
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .layer-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .layer-number {
+                margin: 0 auto;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">MalDataGen</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#models">Models</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#docs">Documentation</a></li>
+                <a href="https://github.com/SBSeg25/MalDataGen" class="btn-nav" target="_blank">GitHub</a>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>MalDataGen</h1>
+                    <p class="subtitle">🌊 Jellyfish Edition (v1.0.0)</p>
+                    <p>An advanced Python framework for generating and evaluating synthetic tabular datasets using modern generative models, including diffusion and adversarial architectures.</p>
+                    
+                    <div class="badges">
+                        <span class="badge">✅ Active</span>
+                        <span class="badge">🐍 Python 3.8+</span>
+                        <span class="badge">🚀 GPU Supported</span>
+                        <span class="badge">📄 MIT License</span>
+                        <span class="badge">💚 Open Source</span>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="https://github.com/SBSeg25/MalDataGen" class="btn btn-primary" target="_blank">Get Started</a>
+                        <a href="#docs" class="btn btn-secondary">Documentation</a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <div class="code-card">
+                        <pre><code># Quick Start
+git clone https://github.com/SBSeg25/MalDataGen.git
+cd MalDataGen
+pip install -r requirements.txt
+
+# Run demo (3 minutes)
+python3 run_campaign_sbseg.py -c sf
+
+# Full experiments (7 hours)
+python3 run_campaign_sbseg.py</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Modular Architecture</h3>
+                    <p>Extensible design supporting multiple generative models with consistent APIs for easy integration and experimentation.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3>GPU Acceleration</h3>
+                    <p>Full CUDA support for efficient training on large datasets. Optional GPU execution for faster model convergence.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3>Comprehensive Metrics</h3>
+                    <p>Built-in evaluation suite including accuracy, precision, recall, F1-score, ROC-AUC, and distance metrics.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Dual Evaluation</h3>
+                    <p>TS-TR and TR-TS validation strategies for thorough assessment of synthetic data quality and model generalization.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📈</div>
+                    <h3>Visualization Tools</h3>
+                    <p>Publication-ready charts, confusion matrices, heatmaps, and clustering visualizations for data analysis.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🐳</div>
+                    <h3>Docker Support</h3>
+                    <p>Containerized execution environment ensuring reproducibility across different systems and configurations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="models" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
+        <div class="container">
+            <h2 class="section-title fade-in">Supported Models</h2>
+            
+            <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Native Implementations</h3>
+            <div class="models-grid">
+                <div class="model-card fade-in">
+                    <h4>CGAN</h4>
+                    <p>Conditional GANs for controlled generation with label conditioning</p>
+                    <span class="model-tag">Class Balancing</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>WGAN & WGAN-GP</h4>
+                    <p>Wasserstein GAN with improved stability via gradient penalty</p>
+                    <span class="model-tag">Stable Training</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>VAE</h4>
+                    <p>Variational Autoencoder with probabilistic latent space</p>
+                    <span class="model-tag">Probabilistic</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>Denoising Diffusion</h4>
+                    <p>Progressive noise-based generation for high-quality samples</p>
+                    <span class="model-tag">State-of-the-art</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>Latent Diffusion</h4>
+                    <p>Efficient diffusion in compressed latent space</p>
+                    <span class="model-tag">High Resolution</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>VQ-VAE</h4>
+                    <p>Discrete latent representations via vector quantization</p>
+                    <span class="model-tag">Categorical Data</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>SMOTE</h4>
+                    <p>Synthetic Minority Over-sampling Technique</p>
+                    <span class="model-tag">Imbalanced Data</span>
+                </div>
+            </div>
+
+            <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin: 80px 0 40px; color: var(--primary-color);">Third-Party Integration (SDV)</h3>
+            <div class="models-grid">
+                <div class="model-card fade-in">
+                    <h4>TVAE</h4>
+                    <p>Tabular VAE optimized for structured data synthesis</p>
+                    <span class="model-tag">SDV</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>Copula</h4>
+                    <p>Statistical modeling based on dependency functions</p>
+                    <span class="model-tag">SDV</span>
+                </div>
+
+                <div class="model-card fade-in">
+                    <h4>CTGAN</h4>
+                    <p>Conditional GAN with mode-specific normalization</p>
+                    <span class="model-tag">SDV</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards">
+        <div class="container">
+            <h2 class="section-title fade-in">Awards & Recognition</h2>
+            <div class="awards-grid">
+                <div class="award-card fade-in">
+                    <div class="award-icon">🏆</div>
+                    <h3>Best Tool SBSEG 2025</h3>
+                    <p>Recognized as the most innovative and impactful tool at the Brazilian Symposium on Cybersecurity</p>
+                </div>
+
+                <div class="award-card fade-in">
+                    <div class="award-icon">💎</div>
+                    <h3>Highlighted Artifact</h3>
+                    <p>Awarded for outstanding contributions in the artifacts category with exceptional documentation and reproducibility</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" style="background: linear-gradient(180deg, var(--light-card) 0%, white 100%);">
+        <div class="container">
+            <h2 class="section-title fade-in">System Architecture</h2>
+            
+            <div class="architecture-description fade-in" style="max-width: 900px; margin: 0 auto 60px; text-align: center;">
+                <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.8;">
+                    The MalDataGen framework follows a modular architecture with four main layers, providing a comprehensive pipeline for synthetic data generation and evaluation.
+                </p>
+            </div>
+
+            <div class="architecture-layers">
+                <div class="layer-card fade-in">
+                    <div class="layer-number">1</div>
+                    <div class="layer-content">
+                        <h3>Input Layer</h3>
+                        <p>Handles data ingestion from CSV/XLS formats, preprocessing, and stratified k-fold splitting for robust evaluation.</p>
+                        <div class="layer-components">
+                            <span class="component-tag">CSV/XLS Data</span>
+                            <span class="component-tag">Data Preprocessing</span>
+                            <span class="component-tag">K-Fold Split</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layer-card fade-in">
+                    <div class="layer-number">2</div>
+                    <div class="layer-content">
+                        <h3>Generative Models</h3>
+                        <p>Core implementation of 8 different native generative algorithms, from adversarial to diffusion-based approaches.</p>
+                        <div class="layer-components">
+                            <span class="component-tag">CGAN</span>
+                            <span class="component-tag">WGAN</span>
+                            <span class="component-tag">VAE</span>
+                            <span class="component-tag">Diffusion</span>
+                            <span class="component-tag">VQ-VAE</span>
+                            <span class="component-tag">SMOTE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layer-card fade-in">
+                    <div class="layer-number">3</div>
+                    <div class="layer-content">
+                        <h3>Third-Party Integration</h3>
+                        <p>Seamless integration with Synthetic Data Vault (SDV) library models for enhanced generation capabilities.</p>
+                        <div class="layer-components">
+                            <span class="component-tag">CTGAN</span>
+                            <span class="component-tag">TVAE</span>
+                            <span class="component-tag">Copula</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layer-card fade-in">
+                    <div class="layer-number">4</div>
+                    <div class="layer-content">
+                        <h3>Evaluation Framework</h3>
+                        <p>Implements TS-TR and TR-TS evaluation strategies with cross-validation for comprehensive quality assessment.</p>
+                        <div class="layer-components">
+                            <span class="component-tag">TS-TR Strategy</span>
+                            <span class="component-tag">TR-TS Strategy</span>
+                            <span class="component-tag">Cross-Validation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layer-card fade-in">
+                    <div class="layer-number">5</div>
+                    <div class="layer-content">
+                        <h3>Metrics & Analysis</h3>
+                        <p>Comprehensive evaluation metrics and publication-ready visualization capabilities for thorough analysis.</p>
+                        <div class="layer-components">
+                            <span class="component-tag">Binary Metrics</span>
+                            <span class="component-tag">Distance Metrics</span>
+                            <span class="component-tag">Efficiency Metrics</span>
+                            <span class="component-tag">Visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="architecture-flow fade-in" style="margin-top: 80px;">
+                <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary-color);">Data Flow Pipeline</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-icon">📥</div>
+                        <h4>Ingest</h4>
+                        <p>CSV/XLS Data</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">⚙️</div>
+                        <h4>Process</h4>
+                        <p>Clean & Split</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🧠</div>
+                        <h4>Generate</h4>
+                        <p>Synthetic Data</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔍</div>
+                        <h4>Evaluate</h4>
+                        <p>TS-TR & TR-TS</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📊</div>
+                        <h4>Analyze</h4>
+                        <p>Metrics & Viz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="docs" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
+        <div class="container">
+            <h2 class="section-title fade-in">Documentation</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📚</div>
+                    <h3>API Reference</h3>
+                    <p>Complete API documentation with examples and best practices for all models and utilities.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Tutorials</h3>
+                    <p>Step-by-step guides for common use cases, from basic generation to advanced customization.</p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📐</div>
+                    <h3>Architecture Diagrams</h3>
+                    <p>8 comprehensive Mermaid diagrams documenting system design, data flow, and evaluation strategies.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" class="btn btn-primary" target="_blank">View Full Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 MalDataGen. MIT License.</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/SBSeg25/MalDataGen" target="_blank">GitHub</a> • 
+                <a href="https://doi.org/10.5753/sbseg_estendido.2025.12113" target="_blank">Paper</a> • 
+                <a href="https://github.com/SBSeg25/MalDataGen/tree/main/Docs" target="_blank">Documentation</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 14px;">
+                Built by Kayuã Paim, Angelo Nogueira, Diego Kreutz, Weverton Cordeiro, and Rodrigo Mansilha
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
