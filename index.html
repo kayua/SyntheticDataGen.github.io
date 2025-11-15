@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SynDataGen - Composable Framework</title>
+    <title>MalDataGen - Composable Framework</title>
     <style>
         * {
             margin: 0;
@@ -337,16 +337,16 @@
         }
 
         /* Python syntax highlighting */
-        .code-keyword { color: #ff79c6; font-weight: bold; } /* Pink for keywords */
-        .code-function { color: #50fa7b; } /* Green for functions */
-        .code-string { color: #f1fa8c; } /* Yellow for strings */
-        .code-comment { color: #6272a4; font-style: italic; } /* Gray for comments */
-        .code-number { color: #bd93f9; } /* Purple for numbers */
-        .code-class { color: #8be9fd; } /* Cyan for classes */
-        .code-operator { color: #ff79c6; } /* Pink for operators */
-        .code-import { color: #ffb86c; } /* Orange for imports */
-        .code-constant { color: #bd93f9; } /* Purple for constants */
-        .code-builtin { color: #50fa7b; } /* Green for built-in functions */
+        .code-keyword { color: #ff79c6; font-weight: bold; }
+        .code-function { color: #50fa7b; }
+        .code-string { color: #f1fa8c; }
+        .code-comment { color: #6272a4; font-style: italic; }
+        .code-number { color: #bd93f9; }
+        .code-class { color: #8be9fd; }
+        .code-operator { color: #ff79c6; }
+        .code-import { color: #ffb86c; }
+        .code-constant { color: #bd93f9; }
+        .code-builtin { color: #50fa7b; }
 
         /* Section Styles */
         section {
@@ -821,7 +821,7 @@
 
 <nav id="navbar">
     <div class="nav-container">
-        <div class="logo">SynDataGen</div>
+        <div class="logo">MalDataGen</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#features">Features</a></li>
@@ -831,7 +831,7 @@
             <li><a href="#awards">Awards</a></li>
             <li><a href="#usage">Usage</a></li>
             <li><a href="#docs">Documentation</a></li>
-            <a href="https://github.com/SBSeg25/SynDataGen" class="btn-nav" target="_blank">GitHub</a>
+            <a href="https://pypi.org/project/maldatagen/" class="btn-nav" target="_blank">PyPI</a>
         </ul>
     </div>
 </nav>
@@ -840,7 +840,7 @@
     <div class="container">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>SynDataGen</h1>
+                <h1>MalDataGen</h1>
                 <p class="subtitle">🌊 Jellyfish Edition (v1.0.0)</p>
                 <p>An advanced Python framework for generating and evaluating synthetic tabular datasets using modern generative models, including diffusion and adversarial architectures.</p>
 
@@ -853,30 +853,30 @@
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="https://github.com/SBSeg25/SynDataGen" class="btn btn-primary" target="_blank">Get Started</a>
+                    <a href="https://pypi.org/project/maldatagen/" class="btn btn-primary" target="_blank">Get Started</a>
                     <a href="#docs" class="btn btn-secondary">Documentation</a>
                 </div>
             </div>
 
             <div class="hero-image">
                 <div class="code-card">
-                        <pre><code><span class="code-comment"># Quick Start</span>
-<span class="code-keyword">git</span> clone https:<span class="code-comment">//github.com/SBSeg25/SynDataGen.git</span>
-<span class="code-keyword">cd</span> SynDataGen
-<span class="code-keyword">pip</span> install -r requirements.txt
+                        <pre><code><span class="code-comment"># Quick Install</span>
+<span class="code-keyword">pip</span> install maldatagen
 
-<span class="code-comment"># Run demo (3 minutes)</span>
-<span class="code-keyword">python3</span> run_campaign_sbseg.py -c sf
+<span class="code-comment"># Import and use</span>
+<span class="code-keyword">from</span> maldatagen.Engine.Models.Adversarial <span class="code-keyword">import</span> AdversarialModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Adversarial <span class="code-keyword">import</span> AdversarialAlgorithm
 
-<span class="code-comment"># Full experiments (7 hours)</span>
-<span class="code-keyword">python3</span> run_campaign_sbseg.py</code></pre>
+<span class="code-comment"># Generate synthetic data</span>
+model = AdversarialModel(...)
+algorithm = AdversarialAlgorithm(...)
+samples = algorithm.get_samples(...)</code></pre>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Seção de Features que estava faltando no posicionamento correto -->
 <section id="features">
     <div class="container">
         <h2 class="section-title fade-in">Key Features</h2>
@@ -912,9 +912,9 @@
             </div>
 
             <div class="feature-card fade-in">
-                <div class="feature-icon">🐳</div>
-                <h3>Docker Support</h3>
-                <p>Containerized execution environment ensuring reproducibility across different systems and configurations.</p>
+                <div class="feature-icon">📦</div>
+                <h3>Easy Installation</h3>
+                <p>Simple pip installation with automatic dependency management for seamless setup and integration.</p>
             </div>
         </div>
     </div>
@@ -964,14 +964,13 @@
                         <li>✅ Python 3.8 or higher</li>
                         <li>✅ TensorFlow 2.x / PyTorch</li>
                         <li>✅ NumPy, Pandas, Scikit-learn</li>
-                        <li>✅ Docker (optional, for containerized execution)</li>
+                        <li>✅ Install via pip: <code>pip install maldatagen</code></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</section> <!-- Fechando a section de requirements -->
-
+</section>
 
 <section id="models" style="background: linear-gradient(180deg, white 0%, var(--light-card) 100%);">
     <div class="container">
@@ -1004,42 +1003,15 @@
             </div>
 
             <div class="model-card fade-in">
-                <h4>Latent Diffusion</h4>
-                <p>Efficient diffusion in compressed latent space</p>
-                <span class="model-tag">High Resolution</span>
+                <h4>Autoencoder</h4>
+                <p>Standard autoencoder for data compression and generation</p>
+                <span class="model-tag">Compression</span>
             </div>
 
             <div class="model-card fade-in">
                 <h4>VQ-VAE</h4>
                 <p>Discrete latent representations via vector quantization</p>
                 <span class="model-tag">Categorical Data</span>
-            </div>
-
-            <div class="model-card fade-in">
-                <h4>SMOTE</h4>
-                <p>Synthetic Minority Over-sampling Technique</p>
-                <span class="model-tag">Imbalanced Data</span>
-            </div>
-        </div>
-
-        <h3 style="font-size: 36px; font-weight: 800; text-align: center; margin: 80px 0 40px; color: var(--primary-color);">Third-Party Integration (SDV)</h3>
-        <div class="models-grid">
-            <div class="model-card fade-in">
-                <h4>TVAE</h4>
-                <p>Tabular VAE optimized for structured data synthesis</p>
-                <span class="model-tag">SDV</span>
-            </div>
-
-            <div class="model-card fade-in">
-                <h4>Copula</h4>
-                <p>Statistical modeling based on dependency functions</p>
-                <span class="model-tag">SDV</span>
-            </div>
-
-            <div class="model-card fade-in">
-                <h4>CTGAN</h4>
-                <p>Conditional GAN with mode-specific normalization</p>
-                <span class="model-tag">SDV</span>
             </div>
         </div>
     </div>
@@ -1070,7 +1042,7 @@
 
         <div class="architecture-description fade-in" style="max-width: 900px; margin: 0 auto 60px; text-align: center;">
             <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.8;">
-                The SynDataGen framework follows a modular architecture with four main layers, providing a comprehensive pipeline for synthetic data generation and evaluation.
+                The MalDataGen framework follows a modular architecture with four main layers, providing a comprehensive pipeline for synthetic data generation and evaluation.
             </p>
         </div>
 
@@ -1092,33 +1064,21 @@
                 <div class="layer-number">2</div>
                 <div class="layer-content">
                     <h3>Generative Models</h3>
-                    <p>Core implementation of 8 different native generative algorithms, from adversarial to diffusion-based approaches.</p>
+                    <p>Core implementation of multiple native generative algorithms, from adversarial to diffusion-based approaches.</p>
                     <div class="layer-components">
                         <span class="component-tag">CGAN</span>
                         <span class="component-tag">WGAN</span>
+                        <span class="component-tag">WGAN-GP</span>
                         <span class="component-tag">VAE</span>
                         <span class="component-tag">Diffusion</span>
                         <span class="component-tag">VQ-VAE</span>
-                        <span class="component-tag">SMOTE</span>
+                        <span class="component-tag">Autoencoder</span>
                     </div>
                 </div>
             </div>
 
             <div class="layer-card fade-in">
                 <div class="layer-number">3</div>
-                <div class="layer-content">
-                    <h3>Third-Party Integration</h3>
-                    <p>Seamless integration with Synthetic Data Vault (SDV) library models for enhanced generation capabilities.</p>
-                    <div class="layer-components">
-                        <span class="component-tag">CTGAN</span>
-                        <span class="component-tag">TVAE</span>
-                        <span class="component-tag">Copula</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="layer-card fade-in">
-                <div class="layer-number">4</div>
                 <div class="layer-content">
                     <h3>Evaluation Framework</h3>
                     <p>Implements TS-TR and TR-TS evaluation strategies with cross-validation for comprehensive quality assessment.</p>
@@ -1131,7 +1091,7 @@
             </div>
 
             <div class="layer-card fade-in">
-                <div class="layer-number">5</div>
+                <div class="layer-number">4</div>
                 <div class="layer-content">
                     <h3>Metrics & Analysis</h3>
                     <p>Comprehensive evaluation metrics and publication-ready visualization capabilities for thorough analysis.</p>
@@ -1194,100 +1154,143 @@
                 <pre><code><span class="code-keyword">import</span> numpy
 <span class="code-keyword">import</span> tensorflow
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
-<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
 <span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> BinaryCrossentropy
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.Adversarial.AdversarialModel <span class="code-keyword">import</span> AdversarialModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Adversarial.AdversarialAlgorithm <span class="code-keyword">import</span> AdversarialAlgorithm
 
-<span class="code-keyword">from</span> SynDataGen.Engine.Models.Adversarial.AdversarialModel <span class="code-keyword">import</span> AdversarialModel
-<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Adversarial.AdversarialAlgorithm <span class="code-keyword">import</span> AdversarialAlgorithm
-
-<span class="code-comment"># Define class distribution and input shape</span>
+<span class="code-comment"># Configuration</span>
 number_samples_per_class = {
-    <span class="code-string">"classes"</span>: {<span class="code-number">1</span>: <span class="code-number">100</span>, <span class="code-number">2</span>: <span class="code-number">200</span>, <span class="code-number">3</span>: <span class="code-number">150</span>},
+    <span class="code-string">"classes"</span>: {<span class="code-number">0</span>: <span class="code-number">100</span>, <span class="code-number">1</span>: <span class="code-number">200</span>, <span class="code-number">2</span>: <span class="code-number">150</span>},
     <span class="code-string">"number_classes"</span>: <span class="code-number">3</span>
 }
-input_shape = (<span class="code-number">1200</span>, )
+input_shape = <span class="code-number">1200</span>
 
 <span class="code-comment"># Initialize Adversarial Model</span>
 adversarial_model = AdversarialModel(
-    latent_dimension=<span class="code-number">128</span>,
+    latent_dimension=<span class="code-number">100</span>,
     output_shape=input_shape,
-    activation_function=<span class="code-string">"LeakyReLU"</span>,
+    activation_function=<span class="code-string">'leakyrelu'</span>,
     initializer_mean=<span class="code-number">0.0</span>,
-    initializer_deviation=<span class="code-number">0.5</span>,
-    dropout_decay_rate_g=<span class="code-number">0.2</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_rate_g=<span class="code-number">0.3</span>,
     dropout_decay_rate_d=<span class="code-number">0.4</span>,
-    last_layer_activation=<span class="code-string">"Sigmoid"</span>,
-    dense_layer_sizes_g=[<span class="code-number">128</span>],
-    dense_layer_sizes_d=[<span class="code-number">128</span>],
+    last_layer_activation=<span class="code-string">'tanh'</span>,
+    dense_layer_sizes_g=[<span class="code-number">256</span>, <span class="code-number">512</span>, <span class="code-number">1024</span>],
+    dense_layer_sizes_d=[<span class="code-number">1024</span>, <span class="code-number">512</span>, <span class="code-number">256</span>],
     dataset_type=numpy.float32,
     number_samples_per_class=number_samples_per_class
 )
 
-<span class="code-comment"># Setup training algorithm</span>
+<span class="code-comment"># Setup algorithm</span>
 adversarial_algorithm = AdversarialAlgorithm(
     generator_model=adversarial_model.get_generator(),
     discriminator_model=adversarial_model.get_discriminator(),
-    latent_dimension=<span class="code-number">128</span>,
+    latent_dimension=<span class="code-number">100</span>,
     loss_generator=<span class="code-string">'binary_crossentropy'</span>,
     loss_discriminator=<span class="code-string">'binary_crossentropy'</span>,
-    file_name_discriminator=<span class="code-string">"discriminator_model"</span>,
-    file_name_generator=<span class="code-string">"generator_model"</span>,
-    models_saved_path=<span class="code-string">"models_saved/"</span>,
+    file_name_discriminator=<span class="code-string">'discriminator.h5'</span>,
+    file_name_generator=<span class="code-string">'generator.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>,
     latent_mean_distribution=<span class="code-number">0.0</span>,
     latent_stander_deviation=<span class="code-number">1.0</span>,
-    smoothing_rate=<span class="code-number">0.15</span>
+    smoothing_rate=<span class="code-number">0.1</span>
 )
 
 <span class="code-comment"># Compile and train</span>
-generator_optimizer = Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>)
-discriminator_optimizer = Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>)
-
 adversarial_algorithm.compile(
-    generator_optimizer, discriminator_optimizer,
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
     BinaryCrossentropy(), BinaryCrossentropy()
 )
 
 adversarial_algorithm.fit(
     x_real_samples,
     to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
-    epochs=<span class="code-number">1000</span>, batch_size=<span class="code-number">32</span>
+    epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
 )
 
 <span class="code-comment"># Generate synthetic samples</span>
 samples = adversarial_algorithm.get_samples(number_samples_per_class)</code></pre>
             </div>
 
+            <!-- Autoencoder Example -->
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Autoencoder</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Standard autoencoder for dimensionality reduction and data generation.</p>
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.Autoencoder.ModelAutoencoder <span class="code-keyword">import</span> AutoencoderModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Autoencoder.AutoencoderAlgorithm <span class="code-keyword">import</span> AutoencoderAlgorithm
+
+<span class="code-comment"># Configuration</span>
+number_samples_per_class = {
+    <span class="code-string">"classes"</span>: {<span class="code-number">0</span>: <span class="code-number">100</span>, <span class="code-number">1</span>: <span class="code-number">200</span>, <span class="code-number">2</span>: <span class="code-number">150</span>},
+    <span class="code-string">"number_classes"</span>: <span class="code-number">3</span>
+}
+
+<span class="code-comment"># Initialize autoencoder</span>
+autoencoder_model = AutoencoderModel(
+    latent_dimension=<span class="code-number">64</span>,
+    output_shape=<span class="code-number">1200</span>,
+    activation_function=<span class="code-string">'relu'</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_encoder=<span class="code-number">0.2</span>,
+    dropout_decay_decoder=<span class="code-number">0.2</span>,
+    last_layer_activation=<span class="code-string">'sigmoid'</span>,
+    number_neurons_encoder=[<span class="code-number">512</span>, <span class="code-number">256</span>, <span class="code-number">128</span>],
+    number_neurons_decoder=[<span class="code-number">128</span>, <span class="code-number">256</span>, <span class="code-number">512</span>],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
+)
+
+<span class="code-comment"># Setup algorithm</span>
+autoencoder_algorithm = AutoencoderAlgorithm(
+    encoder_model=autoencoder_model.get_encoder(<span class="code-number">1200</span>),
+    decoder_model=autoencoder_model.get_decoder(<span class="code-number">1200</span>),
+    loss_function=<span class="code-string">'mse'</span>,
+    file_name_encoder=<span class="code-string">'encoder.h5'</span>,
+    file_name_decoder=<span class="code-string">'decoder.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>,
+    latent_mean_distribution=<span class="code-number">0.0</span>,
+    latent_stander_deviation=<span class="code-number">1.0</span>,
+    latent_dimension=<span class="code-number">64</span>
+)
+
+<span class="code-comment"># Train and generate</span>
+autoencoder_algorithm.compile(loss=<span class="code-string">'mse'</span>)
+autoencoder_algorithm.fit(
+    (x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>)),
+    x_real_samples, epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = autoencoder_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
             <!-- Diffusion Model Example -->
-            <div class="code-card fade-in">
-                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Diffusion Model</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">State-of-the-art generation using denoising diffusion with latent space compression.</p>
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Denoising Diffusion Model</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">State-of-the-art generation using progressive denoising diffusion processes.</p>
                 <pre><code><span class="code-keyword">import</span> numpy
 <span class="code-keyword">import</span> tensorflow
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> MeanSquaredError
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-
-<span class="code-keyword">from</span> SynDataGen.Engine.Models.Diffusion.DiffusionModelUnet <span class="code-keyword">import</span> UNetModel
-<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.AlgorithmDiffusion <span class="code-keyword">import</span> DiffusionModel
-<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.GaussianDiffusion <span class="code-keyword">import</span> GaussianDiffusion
-<span class="code-keyword">from</span> SynDataGen.Engine.Models.Diffusion.VariationalAutoencoderModel <span class="code-keyword">import</span> VariationalModelDiffusion
-<span class="code-keyword">from</span> SynDataGen.Engine.Algorithms.Diffusion.AlgorithmVariationalAutoencoderDiffusion <span class="code-keyword">import</span> VariationalAlgorithmDiffusion
-
-number_samples_per_class = {
-    <span class="code-string">"classes"</span>: {<span class="code-number">1</span>: <span class="code-number">100</span>, <span class="code-number">2</span>: <span class="code-number">200</span>, <span class="code-number">3</span>: <span class="code-number">150</span>},
-    <span class="code-string">"number_classes"</span>: <span class="code-number">3</span>
-}
-input_shape = (<span class="code-number">1200</span>, )
+<span class="code-keyword">from</span> maldatagen.Engine.Models.DenoisingDiffusion.DiffusionModelUnet <span class="code-keyword">import</span> UNetDenoisingModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.DenoisingDiffusion.AlgorithmDenoisingDiffusion <span class="code-keyword">import</span> DenoisingDiffusionAlgorithm
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.LatentDiffusion.GaussianLatentDiffusion <span class="code-keyword">import</span> GaussianDiffusion
 
 <span class="code-comment"># Initialize UNet models</span>
-first_instance_unet = UNetModel(
-    embedding_dimension=<span class="code-number">128</span>,
+first_instance_unet = UNetDenoisingModel(
+    output_shape=<span class="code-number">1200</span>,
     embedding_channels=<span class="code-number">1</span>,
     list_neurons_per_level=[<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">4</span>],
     list_attentions=[<span class="code-keyword">False</span>, <span class="code-keyword">True</span>, <span class="code-keyword">True</span>],
     number_residual_blocks=<span class="code-number">2</span>,
     normalization_groups=<span class="code-number">1</span>,
     intermediary_activation_function=<span class="code-string">'swish'</span>,
+    intermediary_activation_alpha=<span class="code-number">0.2</span>,
+    last_layer_activation=<span class="code-string">'linear'</span>,
     number_samples_per_class=number_samples_per_class
 )
 
@@ -1297,47 +1300,259 @@ second_unet_model.set_weights(first_unet_model.get_weights())
 
 <span class="code-comment"># Initialize Gaussian Diffusion</span>
 gaussian_diffusion_util = GaussianDiffusion(
-    beta_start=<span class="code-number">1e-4</span>,
-    beta_end=<span class="code-number">0.02</span>,
-    time_steps=<span class="code-number">1000</span>,
-    clip_min=-<span class="code-number">1.0</span>,
-    clip_max=<span class="code-number">1.0</span>
-)
-
-<span class="code-comment"># Initialize Variational Model</span>
-variation_model_diffusion = VariationalModelDiffusion(
-    latent_dimension=<span class="code-number">128</span>,
-    output_shape=input_shape,
-    activation_function=<span class="code-string">'swish'</span>,
-    number_neurons_encoder=[<span class="code-number">128</span>, <span class="code-number">64</span>],
-    number_neurons_decoder=[<span class="code-number">64</span>, <span class="code-number">128</span>],
-    number_samples_per_class=number_samples_per_class
+    beta_start=<span class="code-number">1e-4</span>, beta_end=<span class="code-number">0.02</span>, time_steps=<span class="code-number">1000</span>,
+    clip_min=-<span class="code-number">1.0</span>, clip_max=<span class="code-number">1.0</span>
 )
 
 <span class="code-comment"># Setup diffusion algorithm</span>
-diffusion_algorithm = DiffusionModel(
+denoising_diffusion_algorithm = DenoisingDiffusionAlgorithm(
+    output_shape=<span class="code-number">1200</span>,
     first_unet_model=first_unet_model,
     second_unet_model=second_unet_model,
-    encoder_model_image=variation_model_diffusion.get_encoder(),
-    decoder_model_image=variation_model_diffusion.get_decoder(),
     gdf_util=gaussian_diffusion_util,
-    time_steps=<span class="code-number">1000</span>,
-    ema=<span class="code-number">0.9999</span>
-)
-
-diffusion_algorithm.compile(
-    loss=MeanSquaredError(),
-    optimizer=Adam(learning_rate=<span class="code-number">0.002</span>)
+    optimizer_autoencoder=Adam(learning_rate=<span class="code-number">0.0001</span>),
+    optimizer_diffusion=Adam(learning_rate=<span class="code-number">0.0001</span>),
+    time_steps=<span class="code-number">1000</span>, ema=<span class="code-number">0.9999</span>, margin=<span class="code-number">1.0</span>
 )
 
 <span class="code-comment"># Train and generate</span>
-diffusion_algorithm.fit(
-    data_embedding,
-    to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
-    epochs=<span class="code-number">1000</span>, batch_size=<span class="code-number">32</span>
+denoising_diffusion_algorithm.compile(
+    loss=MeanSquaredError(), optimizer=Adam(learning_rate=<span class="code-number">0.0001</span>)
+)
+x_real_samples = tensorflow.expand_dims(x_real_samples, axis=-<span class="code-number">1</span>)
+denoising_diffusion_algorithm.fit(
+    x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
+    epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = denoising_diffusion_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+            <!-- VAE Example -->
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Variational Autoencoder (VAE)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Probabilistic generation using variational inference in latent space.</p>
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.VariationalAutoencoder.VariationalAutoencoderModel <span class="code-keyword">import</span> VariationalModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.VariationalAutoencoder.AlgorithmVariationalAutoencoder <span class="code-keyword">import</span> VariationalAlgorithm
+
+<span class="code-comment"># Initialize VAE</span>
+variation_model = VariationalModel(
+    latent_dimension=<span class="code-number">64</span>,
+    output_shape=<span class="code-number">1200</span>,
+    activation_function=<span class="code-string">'relu'</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_encoder=<span class="code-number">0.2</span>,
+    dropout_decay_decoder=<span class="code-number">0.2</span>,
+    last_layer_activation=<span class="code-string">'sigmoid'</span>,
+    number_neurons_encoder=[<span class="code-number">512</span>, <span class="code-number">256</span>, <span class="code-number">128</span>],
+    number_neurons_decoder=[<span class="code-number">128</span>, <span class="code-number">256</span>, <span class="code-number">512</span>],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
 )
 
-samples = variational_algorithm_diffusion.get_samples(number_samples_per_class)</code></pre>
+<span class="code-comment"># Setup VAE algorithm</span>
+variational_algorithm = VariationalAlgorithm(
+    encoder_model=variation_model.get_encoder(),
+    decoder_model=variation_model.get_decoder(),
+    loss_function=<span class="code-string">'mse'</span>,
+    latent_dimension=<span class="code-number">64</span>,
+    decoder_latent_dimension=<span class="code-number">64</span>,
+    latent_mean_distribution=<span class="code-number">0.0</span>,
+    latent_stander_deviation=<span class="code-number">1.0</span>,
+    file_name_encoder=<span class="code-string">'vae_encoder.h5'</span>,
+    file_name_decoder=<span class="code-string">'vae_decoder.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>
+)
+
+<span class="code-comment"># Train and generate</span>
+variational_algorithm.compile(loss=<span class="code-string">'mse'</span>, optimizer=Adam(learning_rate=<span class="code-number">0.001</span>))
+variational_algorithm.fit(
+    (x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>)),
+    x_real_samples, epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = variational_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+            <!-- VQ-VAE Example -->
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Vector Quantized VAE (VQ-VAE)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Discrete latent representations via vector quantization for categorical data.</p>
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.QuantizedVAE.ModelQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.QuantizedVAE.AlgorithmQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEAlgorithm
+
+<span class="code-comment"># Initialize VQ-VAE</span>
+quantized_vae_model = QuantizedVAEModel(
+    latent_dimension=<span class="code-number">64</span>,
+    number_embeddings=<span class="code-number">512</span>,
+    output_shape=<span class="code-number">1200</span>,
+    activation_function=<span class="code-string">'relu'</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_encoder=<span class="code-number">0.2</span>,
+    dropout_decay_decoder=<span class="code-number">0.2</span>,
+    last_layer_activation=<span class="code-string">'sigmoid'</span>,
+    number_neurons_encoder=[<span class="code-number">512</span>, <span class="code-number">256</span>, <span class="code-number">128</span>],
+    number_neurons_decoder=[<span class="code-number">128</span>, <span class="code-number">256</span>, <span class="code-number">512</span>],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
+)
+
+quantized_model = quantized_vae_model.get_quantized_model()
+
+<span class="code-comment"># Setup VQ-VAE algorithm</span>
+quantized_vae_algorithm = QuantizedVAEAlgorithm(
+    encoder_model=quantized_vae_model.get_encoder(),
+    decoder_model=quantized_vae_model.get_decoder(),
+    quantized_vae_model=quantized_model,
+    train_variance=<span class="code-number">0.1</span>,
+    latent_dimension=<span class="code-number">64</span>,
+    number_embeddings=<span class="code-number">512</span>,
+    file_name_encoder=<span class="code-string">'vqvae_encoder.h5'</span>,
+    file_name_decoder=<span class="code-string">'vqvae_decoder.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>
+)
+
+<span class="code-comment"># Train and generate</span>
+quantized_vae_algorithm.compile(optimizer=Adam(learning_rate=<span class="code-number">0.0001</span>))
+quantized_vae_algorithm.fit(
+    (x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>)),
+    x_real_samples, epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = quantized_vae_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+            <!-- WGAN Example -->
+            <div class="code-card fade-in" style="margin-bottom: 40px;">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Wasserstein GAN (WGAN)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Improved GAN training stability using Wasserstein distance.</p>
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">import</span> tensorflow
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.Wasserstein.ModelWassersteinGAN <span class="code-keyword">import</span> WassersteinModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Wasserstein.AlgorithmWassersteinGAN <span class="code-keyword">import</span> WassersteinAlgorithm
+
+<span class="code-comment"># Initialize WGAN</span>
+wasserstein_model = WassersteinModel(
+    latent_dimension=<span class="code-number">100</span>,
+    output_shape=<span class="code-number">1200</span>,
+    activation_function=<span class="code-string">'leakyrelu'</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_rate_g=<span class="code-number">0.3</span>,
+    dropout_decay_rate_d=<span class="code-number">0.4</span>,
+    last_layer_activation=<span class="code-string">'tanh'</span>,
+    dense_layer_sizes_g=[<span class="code-number">256</span>, <span class="code-number">512</span>, <span class="code-number">1024</span>],
+    dense_layer_sizes_d=[<span class="code-number">1024</span>, <span class="code-number">512</span>, <span class="code-number">256</span>],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
+)
+
+<span class="code-comment"># Define loss functions</span>
+<span class="code-keyword">def</span> discriminator_loss(real_img, fake_img):
+    <span class="code-keyword">return</span> tensorflow.reduce_mean(fake_img) - tensorflow.reduce_mean(real_img)
+
+<span class="code-keyword">def</span> generator_loss(fake_img):
+    <span class="code-keyword">return</span> -tensorflow.reduce_mean(fake_img)
+
+<span class="code-comment"># Setup algorithm</span>
+wasserstein_algorithm = WassersteinAlgorithm(
+    generator_model=wasserstein_model.get_generator(),
+    discriminator_model=wasserstein_model.get_discriminator(),
+    latent_dimension=<span class="code-number">100</span>,
+    generator_loss_fn=<span class="code-string">'wasserstein'</span>,
+    discriminator_loss_fn=<span class="code-string">'wasserstein'</span>,
+    file_name_discriminator=<span class="code-string">'wgan_discriminator.h5'</span>,
+    file_name_generator=<span class="code-string">'wgan_generator.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>,
+    latent_mean_distribution=<span class="code-number">0.0</span>,
+    latent_standard_deviation=<span class="code-number">1.0</span>,
+    smoothing_rate=<span class="code-number">0.1</span>,
+    discriminator_steps=<span class="code-number">5</span>,
+    clip_value=<span class="code-number">0.01</span>
+)
+
+<span class="code-comment"># Train and generate</span>
+wasserstein_algorithm.compile(
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
+    generator_loss, discriminator_loss
+)
+wasserstein_algorithm.fit(
+    x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
+    epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = wasserstein_algorithm.get_samples(number_samples_per_class)</code></pre>
+            </div>
+
+            <!-- WGAN-GP Example -->
+            <div class="code-card fade-in">
+                <h3 style="font-size: 28px; font-weight: 800; color: var(--primary-color); margin-bottom: 20px;">Wasserstein GAN with Gradient Penalty (WGAN-GP)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Enhanced WGAN with gradient penalty for improved training stability.</p>
+                <pre><code><span class="code-keyword">import</span> numpy
+<span class="code-keyword">import</span> tensorflow
+<span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
+<span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
+<span class="code-keyword">from</span> maldatagen.Engine.Models.WassersteinGP.ModelWassersteinGPGAN <span class="code-keyword">import</span> WassersteinGPModel
+<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.WassersteinGP.AlgorithmWassersteinGANGP <span class="code-keyword">import</span> WassersteinGPAlgorithm
+
+<span class="code-comment"># Initialize WGAN-GP</span>
+wasserstein_gp_model = WassersteinGPModel(
+    latent_dimension=<span class="code-number">100</span>,
+    output_shape=<span class="code-number">1200</span>,
+    activation_function=<span class="code-string">'leakyrelu'</span>,
+    initializer_mean=<span class="code-number">0.0</span>,
+    initializer_deviation=<span class="code-number">0.02</span>,
+    dropout_decay_rate_g=<span class="code-number">0.3</span>,
+    dropout_decay_rate_d=<span class="code-number">0.4</span>,
+    last_layer_activation=<span class="code-string">'tanh'</span>,
+    dense_layer_sizes_g=[<span class="code-number">256</span>, <span class="code-number">512</span>, <span class="code-number">1024</span>],
+    dense_layer_sizes_d=[<span class="code-number">1024</span>, <span class="code-number">512</span>, <span class="code-number">256</span>],
+    dataset_type=numpy.float32,
+    number_samples_per_class=number_samples_per_class
+)
+
+<span class="code-comment"># Define loss functions</span>
+<span class="code-keyword">def</span> discriminator_loss(real_img, fake_img):
+    <span class="code-keyword">return</span> tensorflow.reduce_mean(fake_img) - tensorflow.reduce_mean(real_img)
+
+<span class="code-keyword">def</span> generator_loss(fake_img):
+    <span class="code-keyword">return</span> -tensorflow.reduce_mean(fake_img)
+
+<span class="code-comment"># Setup algorithm with gradient penalty</span>
+wasserstein_gp_algorithm = WassersteinGPAlgorithm(
+    generator_model=wasserstein_gp_model.get_generator(),
+    discriminator_model=wasserstein_gp_model.get_discriminator(),
+    latent_dimension=<span class="code-number">100</span>,
+    generator_loss_fn=<span class="code-string">'wasserstein'</span>,
+    discriminator_loss_fn=<span class="code-string">'wasserstein'</span>,
+    file_name_discriminator=<span class="code-string">'wgangp_discriminator.h5'</span>,
+    file_name_generator=<span class="code-string">'wgangp_generator.h5'</span>,
+    models_saved_path=<span class="code-string">'./models/'</span>,
+    latent_mean_distribution=<span class="code-number">0.0</span>,
+    latent_stander_deviation=<span class="code-number">1.0</span>,
+    smoothing_rate=<span class="code-number">0.1</span>,
+    gradient_penalty_weight=<span class="code-number">10.0</span>,
+    discriminator_steps=<span class="code-number">5</span>
+)
+
+<span class="code-comment"># Train and generate</span>
+wasserstein_gp_algorithm.compile(
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
+    Adam(learning_rate=<span class="code-number">0.0002</span>, beta_1=<span class="code-number">0.5</span>, beta_2=<span class="code-number">0.9</span>),
+    generator_loss, discriminator_loss
+)
+wasserstein_gp_algorithm.fit(
+    x_real_samples, to_categorical(y_real_samples, num_classes=<span class="code-number">3</span>),
+    epochs=<span class="code-number">100</span>, batch_size=<span class="code-number">32</span>
+)
+samples = wasserstein_gp_algorithm.get_samples(number_samples_per_class)</code></pre>
             </div>
 
         </div>
@@ -1363,23 +1578,23 @@ samples = variational_algorithm_diffusion.get_samples(number_samples_per_class)<
             <div class="feature-card fade-in">
                 <div class="feature-icon">📐</div>
                 <h3>Architecture Diagrams</h3>
-                <p>8 comprehensive Mermaid diagrams documenting system design, data flow, and evaluation strategies.</p>
+                <p>Comprehensive diagrams documenting system design, data flow, and evaluation strategies.</p>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 60px;">
-            <a href="https://github.com/SBSeg25/SynDataGen/tree/main/Docs" class="btn btn-primary" target="_blank">View Full Documentation</a>
+            <a href="https://pypi.org/project/maldatagen/" class="btn btn-primary" target="_blank">View Documentation on PyPI</a>
         </div>
     </div>
 </section>
 
 <footer>
     <div class="container">
-        <p>© 2025 SynDataGen. MIT License.</p>
+        <p>© 2025 MalDataGen. MIT License.</p>
         <p style="margin-top: 10px;">
-            <a href="https://github.com/SBSeg25/SynDataGen" target="_blank">GitHub</a> •
+            <a href="https://pypi.org/project/maldatagen/" target="_blank">PyPI</a> •
             <a href="https://doi.org/10.5753/sbseg_estendido.2025.12113" target="_blank">Paper</a> •
-            <a href="https://github.com/SBSeg25/SynDataGen/tree/main/Docs" target="_blank">Documentation</a>
+            <a href="https://pypi.org/project/maldatagen/" target="_blank">Documentation</a>
         </p>
         <p style="margin-top: 20px; font-size: 14px;">
             Built by Kayuã Paim, Angelo Nogueira, Diego Kreutz, Weverton Cordeiro, and Rodrigo Mansilha
@@ -1396,24 +1611,19 @@ samples = variational_algorithm_diffusion.get_samples(number_samples_per_class)<
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Add scrolled class for styling
         if (scrollTop > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
 
-        // Hide/show navbar based on scroll direction
         if (scrollTop > scrollThreshold) {
             if (scrollTop > lastScrollTop) {
-                // Scrolling down
                 navbar.classList.add('hidden');
             } else {
-                // Scrolling up
                 navbar.classList.remove('hidden');
             }
         } else {
-            // Always show at top
             navbar.classList.remove('hidden');
         }
 
