@@ -1156,8 +1156,8 @@ samples = algorithm.get_samples(...)</code></pre>
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> BinaryCrossentropy
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.Adversarial.AdversarialModel <span class="code-keyword">import</span> AdversarialModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Adversarial.AdversarialAlgorithm <span class="code-keyword">import</span> AdversarialAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.Adversarial.AdversarialModel <span class="code-keyword">import</span> AdversarialModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.Adversarial.AdversarialAlgorithm <span class="code-keyword">import</span> AdversarialAlgorithm
 
 <span class="code-comment"># Configuration</span>
 number_samples_per_class = {
@@ -1220,8 +1220,8 @@ samples = adversarial_algorithm.get_samples(number_samples_per_class)</code></pr
                 <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8;">Standard autoencoder for dimensionality reduction and data generation.</p>
                 <pre><code><span class="code-keyword">import</span> numpy
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.Autoencoder.ModelAutoencoder <span class="code-keyword">import</span> AutoencoderModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Autoencoder.AutoencoderAlgorithm <span class="code-keyword">import</span> AutoencoderAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.Autoencoder.ModelAutoencoder <span class="code-keyword">import</span> AutoencoderModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.Autoencoder.AutoencoderAlgorithm <span class="code-keyword">import</span> AutoencoderAlgorithm
 
 <span class="code-comment"># Configuration</span>
 number_samples_per_class = {
@@ -1276,9 +1276,9 @@ samples = autoencoder_algorithm.get_samples(number_samples_per_class)</code></pr
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.losses <span class="code-keyword">import</span> MeanSquaredError
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.DenoisingDiffusion.DiffusionModelUnet <span class="code-keyword">import</span> UNetDenoisingModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.DenoisingDiffusion.AlgorithmDenoisingDiffusion <span class="code-keyword">import</span> DenoisingDiffusionAlgorithm
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.LatentDiffusion.GaussianLatentDiffusion <span class="code-keyword">import</span> GaussianDiffusion
+<span class="code-keyword">from</span> maldatagen.engine.models.DenoisingDiffusion.DiffusionModelUnet <span class="code-keyword">import</span> UNetDenoisingModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.DenoisingDiffusion.AlgorithmDenoisingDiffusion <span class="code-keyword">import</span> DenoisingDiffusionAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.LatentDiffusion.GaussianLatentDiffusion <span class="code-keyword">import</span> GaussianDiffusion
 
 <span class="code-comment"># Initialize UNet models</span>
 first_instance_unet = UNetDenoisingModel(
@@ -1334,8 +1334,8 @@ samples = denoising_diffusion_algorithm.get_samples(number_samples_per_class)</c
                 <pre><code><span class="code-keyword">import</span> numpy
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.VariationalAutoencoder.VariationalAutoencoderModel <span class="code-keyword">import</span> VariationalModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.VariationalAutoencoder.AlgorithmVariationalAutoencoder <span class="code-keyword">import</span> VariationalAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.VariationalAutoencoder.VariationalAutoencoderModel <span class="code-keyword">import</span> VariationalModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.VariationalAutoencoder.AlgorithmVariationalAutoencoder <span class="code-keyword">import</span> VariationalAlgorithm
 
 <span class="code-comment"># Initialize VAE</span>
 variation_model = VariationalModel(
@@ -1383,8 +1383,8 @@ samples = variational_algorithm.get_samples(number_samples_per_class)</code></pr
                 <pre><code><span class="code-keyword">import</span> numpy
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.QuantizedVAE.ModelQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.QuantizedVAE.AlgorithmQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.QuantizedVAE.ModelQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.QuantizedVAE.AlgorithmQuantizedVAE <span class="code-keyword">import</span> QuantizedVAEAlgorithm
 
 <span class="code-comment"># Initialize VQ-VAE</span>
 quantized_vae_model = QuantizedVAEModel(
@@ -1435,8 +1435,8 @@ samples = quantized_vae_algorithm.get_samples(number_samples_per_class)</code></
 <span class="code-keyword">import</span> tensorflow
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.Wasserstein.ModelWassersteinGAN <span class="code-keyword">import</span> WassersteinModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.Wasserstein.AlgorithmWassersteinGAN <span class="code-keyword">import</span> WassersteinAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.Wasserstein.ModelWassersteinGAN <span class="code-keyword">import</span> WassersteinModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.Wasserstein.AlgorithmWassersteinGAN <span class="code-keyword">import</span> WassersteinAlgorithm
 
 <span class="code-comment"># Initialize WGAN</span>
 wasserstein_model = WassersteinModel(
@@ -1499,8 +1499,8 @@ samples = wasserstein_algorithm.get_samples(number_samples_per_class)</code></pr
 <span class="code-keyword">import</span> tensorflow
 <span class="code-keyword">from</span> tensorflow.keras.optimizers <span class="code-keyword">import</span> Adam
 <span class="code-keyword">from</span> tensorflow.keras.utils <span class="code-keyword">import</span> to_categorical
-<span class="code-keyword">from</span> maldatagen.Engine.Models.WassersteinGP.ModelWassersteinGPGAN <span class="code-keyword">import</span> WassersteinGPModel
-<span class="code-keyword">from</span> maldatagen.Engine.Algorithms.WassersteinGP.AlgorithmWassersteinGANGP <span class="code-keyword">import</span> WassersteinGPAlgorithm
+<span class="code-keyword">from</span> maldatagen.engine.models.WassersteinGP.ModelWassersteinGPGAN <span class="code-keyword">import</span> WassersteinGPModel
+<span class="code-keyword">from</span> maldatagen.engine.algorithms.WassersteinGP.AlgorithmWassersteinGANGP <span class="code-keyword">import</span> WassersteinGPAlgorithm
 
 <span class="code-comment"># Initialize WGAN-GP</span>
 wasserstein_gp_model = WassersteinGPModel(
