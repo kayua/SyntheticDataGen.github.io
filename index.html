@@ -6,14 +6,18 @@
     <title>MalDataGen 🌊 | Next-Gen Synthetic Data Framework</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- 1. CSS do Tema Prism.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+
     <style>
         :root {
             --primary: #000000;
             --secondary: #111111;
-            --accent: #3B82F6;
-            --accent-light: #60A5FA;
-            --accent-gradient: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-            --accent-gradient-hover: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+            --accent: #4361EE;
+            --accent-light: #4895EF;
+            --accent-gradient: linear-gradient(135deg, #4361EE 0%, #3A0CA3 100%);
+            --accent-gradient-hover: linear-gradient(135deg, #3A56D4 0%, #2D0A8C 100%);
             --light: #FFFFFF;
             --light-secondary: #F8FAFC;
             --dark: #0F172A;
@@ -74,6 +78,7 @@
             transition: background-color 0.5s ease;
         }
 
+        /* Particle Background */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -82,6 +87,7 @@
             background: var(--light);
         }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 12px;
         }
@@ -101,13 +107,36 @@
             background: var(--accent-gradient-hover);
         }
 
+        /* Glass Effect */
         .glass {
             background: var(--glass);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
         }
+        #codeDisplay {
+            background: #1d1f21; /* Cor de fundo escura (pode usar var(--dark) se preferir) */
+            border-radius: var(--radius-md); /* Usa o arredondamento do seu tema */
+            padding: 1.5rem;
+            border: 1px solid var(--border-dark);
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: var(--shadow-dark);
+            margin: 1rem 0;
+        }
 
+        /* Ajusta as cores geradas pelo Prism para combinar */
+        #codeDisplay .token.comment       { color: #7C7C7C; font-style: italic; }
+        #codeDisplay .token.keyword       { color: #96CBFE; font-weight: bold; }
+        #codeDisplay .token.string        { color: #A8FF60; }
+        #codeDisplay .token.function      { color: #FFD2A7; }
+        #codeDisplay .token.class-name    { color: #FFFFB6; }
+        #codeDisplay .token.operator      { color: #EDEDED; }
+        #codeDisplay .token.number        { color: #FF73FD; }
+        #codeDisplay .token.punctuation   { color: #C6C5FE; }
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -142,7 +171,131 @@
             justify-content: space-between;
             align-items: center;
         }
+        .theme-toggle {
+            width: 64px;
+            height: 32px;
+            border-radius: 50px;
+            background: var(--light-secondary);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            padding: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .model-comparison {
+            margin: 30px auto;
+            max-width: 65%;
+        }
 
+        .model-comparison h3 {
+            font-size: 46px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .comparison-table {
+            margin: 0 auto;
+            width: 100%;
+        }
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        .theme-toggle__container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+        }
+
+        .theme-toggle__sun,
+        .theme-toggle__moon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .theme-toggle__thumb {
+            position: absolute;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Estado dark theme */
+        [data-theme="dark"] .theme-toggle__thumb {
+            transform: translateX(32px);
+            background: var(--accent-gradient-hover);
+        }
+
+        [data-theme="dark"] .theme-toggle__sun {
+            color: var(--text-tertiary);
+        }
+
+        [data-theme="dark"] .theme-toggle__moon {
+            color: var(--text-primary);
+        }
+
+        /* Estado light theme */
+        [data-theme="light"] .theme-toggle__sun {
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .theme-toggle__moon {
+            color: var(--text-tertiary);
+        }
+
+        /* Para acessibilidade */
+        .theme-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Versão compacta para mobile */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                width: 56px;
+                height: 28px;
+            }
+
+            [data-theme="dark"] .theme-toggle__thumb {
+                transform: translateX(28px);
+            }
+
+            .theme-toggle__sun,
+            .theme-toggle__moon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .theme-toggle__thumb {
+                width: 22px;
+                height: 22px;
+            }
+        }
         .logo {
             font-size: 32px;
             font-weight: 900;
@@ -212,24 +365,9 @@
         .nav-links a:hover::before {
             width: 100%;
         }
-
-        .theme-toggle {
-            background: none;
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
-            font-size: 16px;
+        .text-white {
+            color: white;
         }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-
         .btn-nav {
             padding: 14px 32px;
             border-radius: var(--radius-md);
@@ -244,12 +382,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 24px rgba(67, 97, 238, 0.3);
         }
 
         .btn-nav:hover {
             transform: translateY(-3px);
-            box-shadow: 0 16px 32px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 16px 32px rgba(67, 97, 238, 0.4);
             background: var(--accent-gradient-hover);
         }
 
@@ -269,6 +407,7 @@
             background: var(--light-secondary);
         }
 
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -431,12 +570,12 @@
         .btn-primary {
             background: var(--accent-gradient);
             color: white;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 24px rgba(67, 97, 238, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-4px);
-            box-shadow: 0 16px 32px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 16px 32px rgba(67, 97, 238, 0.4);
             background: var(--accent-gradient-hover);
         }
 
@@ -494,6 +633,7 @@
             letter-spacing: 1px;
         }
 
+        /* Code Card */
         .code-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -551,7 +691,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(67, 97, 238, 0.1), transparent);
             transition: 0.5s;
         }
 
@@ -562,7 +702,7 @@
         .code-tab.active {
             background: var(--accent-gradient);
             color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
         }
 
         .code-block {
@@ -635,17 +775,19 @@
             font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
         }
 
+        /* Syntax Highlighting */
         .token.comment { color: #6272A4; font-style: italic; }
         .token.keyword { color: #FF79C6; font-weight: bold; }
         .token.string { color: #F1FA8C; }
         .token.function { color: #50FA7B; }
-        .token.number { color: #BD93F9; }
+        .token.number { color: #4361EE; }
         .token.class-name { color: #8BE9FD; }
         .token.operator { color: #FF79C6; }
         .token.punctuation { color: #F8F8F2; }
         .token.property { color: #66D9EF; }
-        .token.boolean { color: #BD93F9; }
+        .token.boolean { color: #4361EE; }
 
+        /* Section Styles */
         section {
             padding: 140px 0;
             position: relative;
@@ -682,6 +824,7 @@
             line-height: 1.6;
         }
 
+        /* Features */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -737,7 +880,7 @@
             font-size: 36px;
             margin-bottom: 32px;
             color: white;
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 12px 32px rgba(67, 97, 238, 0.3);
             transition: var(--transition);
         }
 
@@ -759,6 +902,7 @@
             font-size: 16px;
         }
 
+        /* Models Section */
         .models-section {
             background: linear-gradient(180deg, var(--light) 0%, var(--light-secondary) 100%);
             position: relative;
@@ -828,7 +972,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(67, 97, 238, 0.1), transparent);
             transition: 0.5s;
         }
 
@@ -846,7 +990,7 @@
             background: var(--accent-gradient);
             color: white;
             border-color: transparent;
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 12px 32px rgba(67, 97, 238, 0.3);
             transform: translateY(-4px);
         }
 
@@ -1030,6 +1174,7 @@
             line-height: 1.6;
         }
 
+        /* Applications */
         .applications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1085,7 +1230,7 @@
             font-size: 36px;
             margin-bottom: 32px;
             color: white;
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 12px 32px rgba(67, 97, 238, 0.3);
             transition: var(--transition);
         }
 
@@ -1133,6 +1278,7 @@
             margin-top: 2px;
         }
 
+        /* Footer */
         footer {
             background: var(--light-secondary);
             border-top: 1px solid var(--border);
@@ -1149,8 +1295,8 @@
             width: 100%;
             height: 100%;
             background:
-                    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+                    radial-gradient(circle at 20% 50%, rgba(67, 97, 238, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(58, 12, 163, 0.1) 0%, transparent 50%);
         }
 
         .footer-content {
@@ -1253,7 +1399,7 @@
             color: white;
             transform: translateY(-4px) rotate(10deg);
             border-color: var(--accent);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 24px rgba(67, 97, 238, 0.3);
         }
 
         .footer-bottom {
@@ -1289,6 +1435,7 @@
             color: var(--accent-light);
         }
 
+        /* Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 40px;
@@ -1302,7 +1449,7 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 24px rgba(67, 97, 238, 0.3);
             transition: var(--transition);
             opacity: 0;
             visibility: hidden;
@@ -1320,10 +1467,11 @@
 
         .back-to-top:hover {
             transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 16px 32px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 16px 32px rgba(67, 97, 238, 0.4);
             background: var(--accent-gradient-hover);
         }
 
+        /* Loading Animation */
         .loader {
             position: fixed;
             top: 0;
@@ -1374,6 +1522,7 @@
             text-transform: uppercase;
         }
 
+        /* Progress bar */
         .progress-bar {
             position: fixed;
             top: 0;
@@ -1383,9 +1532,10 @@
             background: var(--accent-gradient);
             z-index: 1001;
             transition: width 0.3s ease;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
         }
 
+        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -1445,6 +1595,7 @@
             background: var(--light-secondary);
         }
 
+        /* Model Comparison */
         .model-comparison {
             margin-top: 80px;
         }
@@ -1507,6 +1658,7 @@
             font-size: 18px;
         }
 
+        /* Responsive */
         @media (max-width: 1200px) {
             .hero-content,
             .features-grid,
@@ -1660,6 +1812,7 @@
             }
         }
 
+        /* Animation classes */
         .fade-in {
             opacity: 0;
             transform: translateY(40px);
@@ -1671,6 +1824,40 @@
             transform: translateY(0);
         }
 
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scale-in.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Floating animation */
         .floating {
             animation: floating 3s ease-in-out infinite;
         }
@@ -1679,7 +1866,26 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
+
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent) }
+        }
     </style>
+
 
 </head>
 <body>
@@ -1687,7 +1893,7 @@
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-logo">
-                <i class="fas fa-wave-square"></i>
+                <img src="icon.png" alt="loading" width="120" height="120">
             </div>
             <div class="loader-text">Loading MalDataGen</div>
         </div>
@@ -1709,11 +1915,11 @@
         <div class="nav-container">
             <a href="#home" class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-wave-square"></i>
+                    <img src="icon.png" alt="loading" width="60" height="60">
                 </div>
                 MalDataGen
             </a>
-
+            
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
@@ -1722,18 +1928,33 @@
                 <li><a href="#docs">Documentation</a></li>
                 <li><a href="#community">Community</a></li>
                 <li>
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+                        <div class="theme-toggle__container">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                                <line x1="12" y1="1" x2="12" y2="4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="20" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="1" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="20" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+                            </svg>
+                            <div class="theme-toggle__thumb"></div>
+                        </div>
                     </button>
                 </li>
                 <li>
                     <a href="https://pypi.org/project/maldatagen/" class="btn-nav" target="_blank">
-                        <i class="fab fa-python"></i>
-                        PyPI
+                        (<i class="fab fa-python text-white"></i>)
                     </a>
                 </li>
             </ul>
-
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -1764,9 +1985,9 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Generate Synthetic Data with AI</h1>
-                <p class="subtitle">🌊 Jellyfish Edition v1.0.0</p>
-                <p>MalDataGen is an advanced framework for generating and evaluating high-quality synthetic tabular datasets using state-of-the-art generative models including Diffusion, GANs, VAEs...</p>
-
+                <p class="subtitle">🌊 Jellyfish Edition v2.0.1</p>
+                <p>MalDataGen is an advanced framework for generating and evaluating high-quality synthetic datasets using state-of-the-art generative models including Diffusion, GANs, VAEs, and more.</p>
+                
                 <div class="badges">
                     <span class="badge"><i class="fas fa-check-circle"></i> Production Ready</span>
                     <span class="badge"><i class="fab fa-python"></i> Python 3.8+</span>
@@ -1774,7 +1995,7 @@
                     <span class="badge"><i class="fas fa-lock-open"></i> MIT License</span>
                     <span class="badge"><i class="fas fa-heart"></i> Open Source</span>
                 </div>
-
+                
                 <div class="cta-buttons">
                     <a href="#docs" class="btn btn-primary">
                         <i class="fas fa-rocket"></i>
@@ -1785,7 +2006,7 @@
                         Star on GitHub
                     </a>
                 </div>
-
+                
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-number">15+</div>
@@ -1801,7 +2022,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="hero-image">
                 <div class="code-card">
                     <div class="code-tabs">
@@ -1809,7 +2030,7 @@
                         <button class="code-tab" data-code="quickstart">Quick Start</button>
                         <button class="code-tab" data-code="generate">Generate</button>
                     </div>
-
+                    
                     <div class="code-block">
                         <div class="code-header">
                             <div class="code-title">example.py</div>
@@ -1854,7 +2075,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
         <div class="container">
             <h2 class="section-title">Why Choose MalDataGen?</h2>
             <p class="section-subtitle">Built for performance, designed for simplicity. Everything you need for synthetic data generation in one powerful package.</p>
-
+            
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
@@ -1863,7 +2084,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                     <h3>Modular Architecture</h3>
                     <p>Plug-and-play design with interchangeable components. Mix and match models, algorithms, and evaluators to build your perfect pipeline.</p>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-tachometer-alt"></i>
@@ -1871,7 +2092,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                     <h3>Blazing Fast</h3>
                     <p>Optimized for performance with GPU acceleration, multi-processing support, and efficient memory management for large-scale datasets.</p>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
@@ -1879,7 +2100,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                     <h3>Comprehensive Metrics</h3>
                     <p>Built-in evaluation suite with 20+ statistical and machine learning metrics to assess synthetic data quality from multiple perspectives.</p>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
@@ -1887,7 +2108,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                     <h3>Privacy Preserving</h3>
                     <p>Differential privacy integration and advanced anonymization techniques to ensure synthetic data doesn't leak original information.</p>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-code"></i>
@@ -1895,7 +2116,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                     <h3>Developer Friendly</h3>
                     <p>Clean API, extensive documentation, type hints, and comprehensive examples to get you started in minutes.</p>
                 </div>
-
+                
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-cloud"></i>
@@ -1912,7 +2133,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
         <div class="container">
             <h2 class="section-title">Supported Models</h2>
             <p class="section-subtitle">Choose from our comprehensive suite of state-of-the-art generative models, each optimized for different data types and use cases.</p>
-
+            
             <div class="tabs-container">
                 <div class="tabs-header">
                     <button class="tab-button active" data-tab="diffusion">
@@ -1937,7 +2158,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                         <i class="fas fa-stream"></i> TVAE
                     </button>
                 </div>
-
+                
                 <!-- Diffusion Model Tab -->
                 <div class="tab-content active" data-tab="diffusion">
                     <div class="model-card">
@@ -1952,7 +2173,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                                 <span class="model-tag"><i class="fas fa-brain"></i> Neural Network</span>
                             </div>
                         </div>
-
+                        
                         <div class="model-stats">
                             <div class="model-stat">
                                 <div class="model-stat-value">9.8</div>
@@ -1971,7 +2192,7 @@ print(f"Quality Score: {metrics['quality']:.2f}")</code></pre>
                                 <div class="model-stat-label">VRAM Usage</div>
                             </div>
                         </div>
-
+                        
                         <div class="code-block" style="margin: 40px 0;">
                             <div class="code-header">
                                 <div class="code-title">diffusion_example.py</div>
@@ -2028,7 +2249,7 @@ synthetic = generator.generate(
 generator.save("diffusion_model_weights.h5")
 np.save("synthetic_data.npy", synthetic)</code></pre>
                         </div>
-
+                        
                         <div class="model-features">
                             <div class="model-feature">
                                 <i class="fas fa-medal"></i>
@@ -2051,7 +2272,7 @@ np.save("synthetic_data.npy", synthetic)</code></pre>
                                 <p>Class-conditional and text-conditional generation for controlled synthetic data creation.</p>
                             </div>
                         </div>
-
+                        
                         <div style="margin-top: 40px;">
                             <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--primary);">Best For:</h4>
                             <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
@@ -2075,7 +2296,7 @@ np.save("synthetic_data.npy", synthetic)</code></pre>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- CGAN Model Tab -->
                 <div class="tab-content" data-tab="cgan">
                     <div class="model-card">
@@ -2090,7 +2311,7 @@ np.save("synthetic_data.npy", synthetic)</code></pre>
                                 <span class="model-tag"><i class="fas fa-cogs"></i> Stable</span>
                             </div>
                         </div>
-
+                        
                         <div class="model-stats">
                             <div class="model-stat">
                                 <div class="model-stat-value">8.7</div>
@@ -2109,7 +2330,7 @@ np.save("synthetic_data.npy", synthetic)</code></pre>
                                 <div class="model-stat-label">VRAM Usage</div>
                             </div>
                         </div>
-
+                        
                         <div class="code-block" style="margin: 40px 0;">
                             <div class="code-header">
                                 <div class="code-title">cgan_example.py</div>
@@ -2171,7 +2392,7 @@ synthetic_data = generator.generate(
 # Evaluate per-class quality
 metrics = generator.evaluate_per_class(features, synthetic_data, labels)</code></pre>
                         </div>
-
+                        
                         <div class="model-features">
                             <div class="model-feature">
                                 <i class="fas fa-tags"></i>
@@ -2196,7 +2417,7 @@ metrics = generator.evaluate_per_class(features, synthetic_data, labels)</code><
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- WGAN Model Tab -->
                 <div class="tab-content" data-tab="wgan">
                     <div class="model-card">
@@ -2211,7 +2432,7 @@ metrics = generator.evaluate_per_class(features, synthetic_data, labels)</code><
                                 <span class="model-tag"><i class="fas fa-chart-line"></i> Smooth Gradients</span>
                             </div>
                         </div>
-
+                        
                         <div class="model-stats">
                             <div class="model-stat">
                                 <div class="model-stat-value">8.5</div>
@@ -2230,7 +2451,7 @@ metrics = generator.evaluate_per_class(features, synthetic_data, labels)</code><
                                 <div class="model-stat-label">VRAM Usage</div>
                             </div>
                         </div>
-
+                        
                         <div class="code-block" style="margin: 40px 0;">
                             <div class="code-header">
                                 <div class="code-title">wgan_example.py</div>
@@ -2268,9 +2489,9 @@ data = torch.randn(10000, 50)  # Example data
 for epoch in range(500):
     for _ in range(5):  # Train critic multiple times
         critic_loss = generator.train_critic(data)
-
+    
     generator_loss = generator.train_generator(data)
-
+    
     # Log metrics
     if epoch % 50 == 0:
         wasserstein_distance = generator.calculate_wasserstein(data)
@@ -2287,7 +2508,7 @@ synthetic = generator.generate(
 wd_score = generator.wasserstein_score(data, synthetic)
 print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                         </div>
-
+                        
                         <div class="model-features">
                             <div class="model-feature">
                                 <i class="fas fa-anchor"></i>
@@ -2312,14 +2533,14 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Add other model tabs similarly (VAE, Autoencoder, CTGAN, TVAE) -->
-
+                
             </div>
 
             <!-- Model Comparison Table -->
             <div class="model-comparison fade-in">
-                <h3 style="font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 40px; color: var(--primary);">Model Comparison</h3>
+                <h3>Model Comparison</h3>
 
                 <div class="comparison-table">
                     <div class="comparison-header">
@@ -2378,7 +2599,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                     </div>
 
                     <div class="comparison-row">
-                        <div class="comparison-cell">Conditional Generation</div>
+                        <div class="comparison-cell">Conditional Gen.</div>
                         <div class="comparison-cell"><i class="fas fa-check comparison-check"></i></div>
                         <div class="comparison-cell"><i class="fas fa-check comparison-check"></i></div>
                         <div class="comparison-cell">Optional</div>
@@ -2400,7 +2621,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                     </div>
 
                     <div class="comparison-row">
-                        <div class="comparison-cell">Privacy Protection</div>
+                        <div class="comparison-cell">Privacy</div>
                         <div class="comparison-cell">High</div>
                         <div class="comparison-cell">Medium</div>
                         <div class="comparison-cell">Medium</div>
@@ -2419,7 +2640,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
         <div class="container">
             <h2 class="section-title">Real-World Applications</h2>
             <p class="section-subtitle">From healthcare to finance, MalDataGen powers synthetic data generation across industries while maintaining privacy and quality.</p>
-
+            
             <div class="applications-grid">
                 <div class="application-card fade-in">
                     <div class="app-icon">
@@ -2434,7 +2655,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                         <li>Security benchmarking</li>
                     </ul>
                 </div>
-
+                
                 <div class="application-card fade-in">
                     <div class="app-icon">
                         <i class="fas fa-heartbeat"></i>
@@ -2448,7 +2669,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                         <li>HIPAA-compliant data</li>
                     </ul>
                 </div>
-
+                
                 <div class="application-card fade-in">
                     <div class="app-icon">
                         <i class="fas fa-chart-line"></i>
@@ -2462,7 +2683,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
                         <li>Credit scoring</li>
                     </ul>
                 </div>
-
+                
                 <div class="application-card fade-in">
                     <div class="app-icon">
                         <i class="fas fa-industry"></i>
@@ -2485,7 +2706,7 @@ print(f"Wasserstein Distance: {wd_score:.4f}")</code></pre>
         <div class="container">
             <h2 class="section-title">Get Started in Minutes</h2>
             <p class="section-subtitle">Comprehensive documentation, tutorials, and examples to help you master synthetic data generation with MalDataGen.</p>
-
+            
             <div style="max-width: 1200px; margin: 0 auto;">
                 <div class="code-card" style="margin-bottom: 60px;">
                     <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 30px; color: var(--primary);">Quick Installation</h3>
@@ -2505,7 +2726,7 @@ pip install -e .
 python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                     </div>
                 </div>
-
+                
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px;">
                     <a href="#" class="btn btn-secondary" style="padding: 30px; text-align: center; flex-direction: column; gap: 20px; height: 100%;">
                         <i class="fas fa-book" style="font-size: 40px;"></i>
@@ -2514,7 +2735,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                             <div style="color: var(--text-secondary); font-size: 14px;">Complete API reference and guides</div>
                         </div>
                     </a>
-
+                    
                     <a href="#" class="btn btn-secondary" style="padding: 30px; text-align: center; flex-direction: column; gap: 20px; height: 100%;">
                         <i class="fas fa-graduation-cap" style="font-size: 40px;"></i>
                         <div>
@@ -2522,7 +2743,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                             <div style="color: var(--text-secondary); font-size: 14px;">Step-by-step learning paths</div>
                         </div>
                     </a>
-
+                    
                     <a href="#" class="btn btn-secondary" style="padding: 30px; text-align: center; flex-direction: column; gap: 20px; height: 100%;">
                         <i class="fas fa-code" style="font-size: 40px;"></i>
                         <div>
@@ -2531,7 +2752,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                         </div>
                     </a>
                 </div>
-
+                
                 <div style="text-align: center;">
                     <a href="https://github.com/yourusername/maldatagen" class="btn btn-primary" target="_blank" style="padding: 20px 50px; font-size: 18px;">
                         <i class="fab fa-github"></i> View on GitHub
@@ -2555,7 +2776,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                     <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-
+            
             <div class="footer-column">
                 <h4>Product</h4>
                 <ul>
@@ -2567,7 +2788,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                     <li><a href="#">Enterprise</a></li>
                 </ul>
             </div>
-
+            
             <div class="footer-column">
                 <h4>Community</h4>
                 <ul>
@@ -2579,7 +2800,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                     <li><a href="#" target="_blank">Code of Conduct</a></li>
                 </ul>
             </div>
-
+            
             <div class="footer-column">
                 <h4>Legal</h4>
                 <ul>
@@ -2592,12 +2813,17 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                 </ul>
             </div>
         </div>
-
+        
         <div class="footer-bottom">
             <p>© 2023 MalDataGen. All rights reserved. Released under MIT License.</p>
             <p style="margin: 0;">Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by the open source community</p>
         </div>
     </footer>
+    <!-- 2. Biblioteca principal do Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- 3. Suporte para Linguagem Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -2608,19 +2834,19 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 1000);
-
+            
             // Initialize particles
             particlesJS('particles-js', {
                 particles: {
                     number: { value: 100, density: { enable: true, value_area: 800 } },
-                    color: { value: "#8B5CF6" },
+                    color: { value: "#5c64f6" },
                     shape: { type: "circle" },
                     opacity: { value: 0.3, random: true },
                     size: { value: 3, random: true },
                     line_linked: {
                         enable: true,
                         distance: 150,
-                        color: "#8B5CF6",
+                        color: "#5c64f6",
                         opacity: 0.2,
                         width: 1
                     },
@@ -2649,7 +2875,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
         const themeToggle = document.getElementById('themeToggle');
         const mobileThemeToggle = document.getElementById('mobileThemeToggle');
         const html = document.documentElement;
-
+        
         function toggleTheme() {
             if (html.hasAttribute('data-theme')) {
                 html.removeAttribute('data-theme');
@@ -2667,14 +2893,14 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                 }
             }
         }
-
+        
         // Check for saved theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             html.setAttribute('data-theme', 'dark');
             themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
-
+        
         themeToggle.addEventListener('click', toggleTheme);
         if (mobileThemeToggle) {
             mobileThemeToggle.addEventListener('click', toggleTheme);
@@ -2684,11 +2910,11 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenuClose = document.getElementById('mobileMenuClose');
         const mobileMenu = document.getElementById('mobileMenu');
-
+        
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.add('active');
         });
-
+        
         mobileMenuClose.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
         });
@@ -2705,17 +2931,17 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
         const navbar = document.getElementById('navbar');
         const backToTop = document.getElementById('backToTop');
         const progressBar = document.getElementById('progressBar');
-
+        
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
+            
             // Navbar scroll effect
             if (scrollTop > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-
+            
             // Hide/show navbar on scroll direction
             if (scrollTop > lastScrollTop && scrollTop > 200) {
                 navbar.style.transform = 'translateY(-100%)';
@@ -2723,26 +2949,26 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
                 navbar.style.transform = 'translateY(0)';
             }
             lastScrollTop = scrollTop;
-
+            
             // Back to top button
             if (scrollTop > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
             }
-
+            
             // Progress bar
             const winHeight = window.innerHeight;
             const docHeight = document.documentElement.scrollHeight - winHeight;
             const scrolled = (scrollTop / docHeight) * 100;
             progressBar.style.width = scrolled + '%';
-
+            
             // Fade in animations
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-
+                
                 if (elementTop < windowHeight - 100) {
                     element.classList.add('active');
                 }
@@ -2752,7 +2978,7 @@ python -c "import maldatagen; print(maldatagen.__version__)"</code></pre>
         // Code tabs
         const codeTabs = document.querySelectorAll('.code-tab');
         const codeDisplay = document.getElementById('codeDisplay');
-
+        
         const codeSnippets = {
             install: `# Install MalDataGen
 pip install maldatagen
@@ -2767,7 +2993,7 @@ pip install -e .
 
 # Verify installation
 python -c "import maldatagen; print(maldatagen.__version__)"`,
-
+            
             quickstart: `from maldatagen import MalDataGen
 import pandas as pd
 
@@ -2789,7 +3015,7 @@ synthetic_data = mdg.generate(
 
 # Save the results
 synthetic_data.to_csv("synthetic_data.csv", index=False)`,
-
+            
             generate: `from maldatagen import MalDataGen
 from maldatagen.evaluation import evaluate_quality
 
@@ -2823,19 +3049,19 @@ metrics = evaluate_quality(
 
 print(f"Quality Score: {metrics['overall']:.3f}")`
         };
-
+        
         codeTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 // Remove active class from all tabs
                 codeTabs.forEach(t => t.classList.remove('active'));
-
+                
                 // Add active class to clicked tab
                 tab.classList.add('active');
-
+                
                 // Update code display
                 const codeType = tab.getAttribute('data-code');
                 codeDisplay.textContent = codeSnippets[codeType];
-
+                
                 // Re-highlight syntax
                 if (window.Prism) {
                     Prism.highlightElement(codeDisplay);
@@ -2868,12 +3094,12 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
                 `;
                 notification.innerHTML = '<i class="fas fa-check-circle"></i> Code copied to clipboard!';
                 document.body.appendChild(notification);
-
+                
                 setTimeout(() => {
                     notification.style.animation = 'slideOut 0.3s ease';
                     setTimeout(() => notification.remove(), 300);
                 }, 2000);
-
+                
                 // Add animation keyframes
                 if (!document.querySelector('#notification-styles')) {
                     const style = document.createElement('style');
@@ -2896,18 +3122,18 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
         // Model tabs - CORRIGIDO
         const modelTabButtons = document.querySelectorAll('.tab-button[data-tab]');
         const modelTabContents = document.querySelectorAll('.tab-content[data-tab]');
-
+        
         modelTabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
-
+                
                 // Remove active class from all buttons and contents
                 modelTabButtons.forEach(btn => btn.classList.remove('active'));
                 modelTabContents.forEach(content => content.classList.remove('active'));
-
+                
                 // Add active class to clicked button
                 button.classList.add('active');
-
+                
                 // Show corresponding content
                 const targetContent = document.querySelector(`.tab-content[data-tab="${tabId}"]`);
                 if (targetContent) {
@@ -2926,7 +3152,7 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
-
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2934,7 +3160,7 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
                 }
             });
         }, observerOptions);
-
+        
         // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
@@ -2944,7 +3170,7 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
             }
-
+            
             // Theme toggle with T
             if (e.key === 't' && e.altKey) {
                 toggleTheme();
@@ -2965,7 +3191,7 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
             element.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-8px)';
             });
-
+            
             element.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
@@ -2991,5 +3217,7 @@ print(f"Quality Score: {metrics['overall']:.3f}")`
             stat.classList.add('floating');
         });
     </script>
+
+
 </body>
 </html>
